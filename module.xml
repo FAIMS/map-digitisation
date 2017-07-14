@@ -1,0 +1,120 @@
+<module>
+
+<User f="nodata">
+  <User f="noscroll">
+    <User_List t="list" f="user" l="Control"/>
+  </User>
+</User>
+
+<Control f="nodata">
+  <Simple_Forms f="noscroll">
+    <New_Simple_Form l="Simple_Form"/>
+    <Existing_Simple_Forms t="list" e="Simple_Form"/>
+  </Simple_Forms>
+  <Map f="noscroll">
+    <Map t="map" f="nolabel"/>
+  </Map>
+</Control>
+
+<Simple_Form>
+  <fmt>{{ID}}</fmt>
+  <Simple_Form>
+    <ID/>
+    <Name/>
+    <gps/>
+    <Dropdown>
+      <opts>
+        <opt>Yes</opt>
+        <opt>No</opt>
+        <opt>FAIL</opt>
+      </opts>
+    </Dropdown>
+    <timestamp/>
+  </Simple_Form>
+</Simple_Form>
+
+<logic><![CDATA[
+/****************************** GIS POINT STYLES ******************************/
+final String MAP_REF = "Control/Map/Map";
+
+/* Displays the geometry of each entity whose menu, by the name of `attribName`,
+ * has `vocabName` saved in it. The geometry is displayed in whatever colour is
+ * given by `geoColor`.
+ *
+ * The geometry is displayed in a layer called `layerName`. This is a
+ * human-readable name that the user can use to toggle the visibility of the
+ * geometry in the UI.
+ */
+void showDatabaseLayerByVocabName(
+    String attribName,
+    String vocabName,
+    int    geoColor, /* Example argument: Color.BLACK */
+    String layerName
+) {
+  int transBlk = Color.parseColor("#AA000000");
+  GeometryStyle sln_ = createLineStyle(10, transBlk, 0.01f, 0.3f, null);
+
+  // Define arguments to `showDatabaseLayer`
+  String q;
+  q  = "SELECT uuid, aenttimestamp";
+  q += "  FROM latestNonDeletedArchEnt";
+  q += "  JOIN latestnondeletedaentvalue USING (uuid)";
+  q += "  JOIN attributekey              USING (attributeid)";
+  q += "  JOIN vocabulary                USING (vocabid)";
+  q += " WHERE {vocabName}  IN ('', vocabname)";
+  q += "   AND {attribName} IN ('', attributename)";
+  q  = dbReplaceFirst(q, "{vocabName}",  vocabName);
+  q  = dbReplaceFirst(q, "{attribName}", attribName);
+
+  boolean isEntity = true;
+  GeometryStyle spt = createPointStyle(10, geoColor, 0.2f, 0.5f);
+  GeometryStyle sln = createLineStyle(10, geoColor, 0.05f, 0.3f, null);
+  GeometryStyle spg = createPolygonStyle(10, geoColor, sln_);
+  GeometryTextStyle stx = createTextStyle(
+      10,
+      Color.BLACK,
+      40,
+      Typeface.SANS_SERIF
+  );
+
+  showDatabaseLayer(
+      MAP_REF,
+      layerName,
+      isEntity,
+      layerName,
+      q,
+      spt,
+      sln,
+      spg,
+      stx
+  );
+}
+
+void showDatabaseLayerByVocabName(
+    String vocabName,
+    int    geoColor,
+    String layerName
+) {
+  showDatabaseLayerByVocabName("", vocabName, geoColor, layerName);
+}
+
+void showDatabaseLayerByVocabName(String vocabName, int geoColor) {
+  String layerName = guessArch16nValFromKey(vocabName);
+  showDatabaseLayerByVocabName(vocabName, geoColor, layerName);
+}
+
+void initMap() {
+  // showBaseMap(MAP_REF, "Base Map", "files/data/R1980_YambolElhovoExt.tif");
+
+  showDatabaseLayerByVocabName("{Yes}",  Color.BLUE);
+  showDatabaseLayerByVocabName("{No}",   Color.CYAN);
+  showDatabaseLayerByVocabName("{FAIL}", Color.GREEN);
+
+  setMapZoom(MAP_REF, 13.0f);
+}
+
+initMap();
+
+]]></logic>
+
+</module>
