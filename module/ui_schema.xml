@@ -18,25 +18,41 @@
             </large>
           </style>
           <!--END: Style-->
-          <User>
-            <User>
+          <User_List>
+            <User_List>
               <User_List/>
-            </User>
-          </User>
+            </User_List>
+            <Manual>
+              <Manual/>
+            </Manual>
+          </User_List>
           <Control>
-            <Simple_Forms>
-              <New_Simple_Form/>
-              <Existing_Simple_Forms/>
-            </Simple_Forms>
             <Map>
               <Map/>
               <Center_Me_1/>
+              <Create_Shape/>
             </Map>
+            <IDs>
+              <Create_Feature/>
+            </IDs>
+            <Search>
+              <Colgroup_0>
+                <Col_0>
+                  <Search_Term/>
+                </Col_0>
+                <Col_1>
+                  <Search_Button/>
+                </Col_1>
+              </Colgroup_0>
+              <Entity_Types/>
+              <Entity_List/>
+            </Search>
           </Control>
-          <Simple_Form>
-            <Simple_Form>
+          <Feature>
+            <Main>
               <ID/>
-              <Name/>
+              <Feature_author/>
+              <Feature_timestamp/>
               <Colgroup_1>
                 <Col_1>
                   <Latitude/>
@@ -57,10 +73,26 @@
                 </Col_3>
               </Colgroup_2>
               <Take_From_GPS_1/>
-              <Dropdown/>
-              <Simple_Form_timestamp/>
-            </Simple_Form>
-          </Simple_Form>
+              <Feature_Type/>
+              <Source/>
+              <Note/>
+              <Go_To_Map/>
+            </Main>
+            <GControl>
+              <GC/>
+              <Date_Completed/>
+              <Description/>
+              <Classification/>
+              <Other_Description/>
+              <Picture/>
+            </GControl>
+          </Feature>
+          <Shape>
+            <Shape_Note>
+              <Label/>
+              <Note/>
+            </Shape_Note>
+          </Shape>
         </faims>
       </instance>
     </model>
@@ -89,34 +121,27 @@
       </group>
     </group>
     <!--END: Style-->
-    <group ref="User">
-      <label>{User}</label>
-      <group ref="User" faims_scrollable="false">
-        <label>{User}</label>
+    <group ref="User_List">
+      <label>{User_List}</label>
+      <group ref="User_List" faims_scrollable="false">
+        <label>{User_List}</label>
         <select1 appearance="compact" ref="User_List">
-          <label>{User_List}</label>
+          <label/>
           <item>
             <label>Options not loaded</label>
             <value>Options not loaded</value>
           </item>
         </select1>
+      </group>
+      <group ref="Manual">
+        <label>{Manual}</label>
+        <input faims_web="true" ref="Manual">
+          <label/>
+        </input>
       </group>
     </group>
     <group ref="Control">
       <label>{Control}</label>
-      <group ref="Simple_Forms" faims_scrollable="false">
-        <label>{Simple_Forms}</label>
-        <trigger ref="New_Simple_Form">
-          <label>{New_Simple_Form}</label>
-        </trigger>
-        <select1 appearance="compact" ref="Existing_Simple_Forms">
-          <label>{Existing_Simple_Forms}</label>
-          <item>
-            <label>Options not loaded</label>
-            <value>Options not loaded</value>
-          </item>
-        </select1>
-      </group>
       <group ref="Map" faims_scrollable="false">
         <label>{Map}</label>
         <input faims_map="true" ref="Map">
@@ -125,17 +150,61 @@
         <trigger ref="Center_Me_1">
           <label>{Center_Me}</label>
         </trigger>
+        <trigger ref="Create_Shape">
+          <label>{Create_Shape}</label>
+        </trigger>
+      </group>
+      <group ref="IDs">
+        <label>{IDs}</label>
+        <trigger ref="Create_Feature">
+          <label>{Create_Feature}</label>
+        </trigger>
+      </group>
+      <group ref="Search" faims_scrollable="false">
+        <label>{Search}</label>
+        <group ref="Colgroup_0" faims_style="orientation">
+          <label/>
+          <group ref="Col_0" faims_style="even">
+            <label/>
+            <input ref="Search_Term">
+              <label>{Search_Term}</label>
+            </input>
+          </group>
+          <group ref="Col_1" faims_style="large">
+            <label/>
+            <trigger ref="Search_Button">
+              <label>{Search}</label>
+            </trigger>
+          </group>
+        </group>
+        <select1 ref="Entity_Types">
+          <label>{Entity_Types}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <select1 appearance="compact" ref="Entity_List">
+          <label>{Entity_List}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
       </group>
     </group>
-    <group ref="Simple_Form" faims_archent_type="Simple Form">
-      <label>{Simple_Form}</label>
-      <group ref="Simple_Form">
-        <label>{Simple_Form}</label>
+    <group ref="Feature" faims_archent_type="Feature">
+      <label>{Feature}</label>
+      <group ref="Main">
+        <label>{Main}</label>
         <input faims_attribute_name="ID" faims_attribute_type="measure" ref="ID">
           <label>{ID}</label>
         </input>
-        <input faims_attribute_name="Name" faims_attribute_type="measure" ref="Name">
-          <label>{Name}</label>
+        <input faims_attribute_name="Feature author" faims_attribute_type="measure" ref="Feature_author" faims_read_only="true">
+          <label>{Author}</label>
+        </input>
+        <input faims_attribute_name="Feature timestamp" faims_attribute_type="measure" ref="Feature_timestamp" faims_read_only="true">
+          <label>{Timestamp}</label>
         </input>
         <group ref="Colgroup_1" faims_style="orientation">
           <label/>
@@ -176,15 +245,66 @@
         <trigger ref="Take_From_GPS_1">
           <label>{Take_From_GPS}</label>
         </trigger>
-        <select1 faims_attribute_name="Dropdown" faims_attribute_type="vocab" ref="Dropdown">
-          <label>{Dropdown}</label>
+        <select1 faims_attribute_name="Feature Type" faims_attribute_type="vocab" ref="Feature_Type">
+          <label>{Feature_Type}</label>
           <item>
             <label>Options not loaded</label>
             <value>Options not loaded</value>
           </item>
         </select1>
-        <input faims_attribute_name="Simple Form timestamp" faims_attribute_type="measure" ref="Simple_Form_timestamp" faims_read_only="true">
-          <label>{Timestamp}</label>
+        <select1 faims_attribute_name="Source" faims_attribute_type="vocab" ref="Source">
+          <label>{Source}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <input faims_attribute_name="Note" faims_attribute_type="measure" ref="Note">
+          <label>{Note}</label>
+        </input>
+        <input faims_attribute_name="Go To Map" faims_attribute_type="measure" ref="Go_To_Map">
+          <label>{Go_To_Map}</label>
+        </input>
+      </group>
+      <group ref="GControl">
+        <label>{GControl}</label>
+        <select1 faims_attribute_name="GC" faims_attribute_type="vocab" ref="GC">
+          <label>{GC}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <input faims_attribute_name="Date Completed" faims_attribute_type="measure" ref="Date_Completed">
+          <label>{Date_Completed}</label>
+        </input>
+        <input faims_attribute_name="Description" faims_attribute_type="measure" ref="Description">
+          <label>{Description}</label>
+        </input>
+        <select1 faims_attribute_name="Classification" faims_attribute_type="vocab" ref="Classification">
+          <label>{Classification}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <input faims_attribute_name="Other Description" faims_attribute_type="measure" ref="Other_Description">
+          <label>{Other_Description}</label>
+        </input>
+        <input faims_attribute_name="Picture" faims_attribute_type="measure" ref="Picture">
+          <label>{Picture}</label>
+        </input>
+      </group>
+    </group>
+    <group ref="Shape" faims_archent_type="Shape">
+      <label>{Shape}</label>
+      <group ref="Shape_Note">
+        <label>{Shape_Note}</label>
+        <input faims_attribute_name="Label" faims_attribute_type="measure" ref="Label">
+          <label>{Label}</label>
+        </input>
+        <input faims_attribute_name="Note" faims_attribute_type="measure" ref="Note">
+          <label>{Note}</label>
         </input>
       </group>
     </group>

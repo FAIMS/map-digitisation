@@ -1,5 +1,5 @@
 /*
- * GENERATED WITH FAIMS-TOOLS, SHA1: 678f60842428cc01e5623bb2a0040e0adf9413c2
+ * GENERATED WITH FAIMS-TOOLS, SHA1: 3eb4d98c9292c277bc57683404289e5fc6553c1e
  */
 import android.util.Log;
 import android.os.Build.MODEL;
@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 // Beanshell won't let me write "\0".
 final String SEP = Character.toString ((char) 0);
 
-final String USER_MENU_PATH = "User/User/User_List";
+final String USER_MENU_PATH = "User_List/User_List/User_List";
 userMenuPath = USER_MENU_PATH; // Depricated. Use `USER_MENU_PATH` instead
 
 final long SESS_START_TIME = System.currentTimeMillis();
@@ -147,35 +147,66 @@ List    TABS_AS_LIST                   = new ArrayList();
 HashSet TABS_AS_HASH_SET               = null;
 HashMap ATTRIB_NAMES_NON_STANDARD      = new HashMap();
 
-REF_TO_TYPE.put("User/User/User_List", "list");
-REF_TO_TYPE.put("Control/Simple_Forms/New_Simple_Form", "button");
-REF_TO_TYPE.put("Control/Simple_Forms/Existing_Simple_Forms", "list");
+REF_TO_TYPE.put("User_List/User_List/User_List", "list");
+REF_TO_TYPE.put("User_List/Manual/Manual", "webview");
 REF_TO_TYPE.put("Control/Map/Map", "map");
 REF_TO_TYPE.put("Control/Map/Center_Me_1", "button");
-REF_TO_TYPE.put("Simple_Form/Simple_Form/ID", "input");
-REF_TO_TYPE.put("Simple_Form/Simple_Form/Name", "input");
-REF_TO_TYPE.put("Simple_Form/Simple_Form/Latitude", "input");
-REF_TO_TYPE.put("Simple_Form/Simple_Form/Longitude", "input");
-REF_TO_TYPE.put("Simple_Form/Simple_Form/Northing", "input");
-REF_TO_TYPE.put("Simple_Form/Simple_Form/Easting", "input");
-REF_TO_TYPE.put("Simple_Form/Simple_Form/Accuracy", "input");
-REF_TO_TYPE.put("Simple_Form/Simple_Form/Take_From_GPS_1", "button");
-REF_TO_TYPE.put("Simple_Form/Simple_Form/Dropdown", "dropdown");
-REF_TO_TYPE.put("Simple_Form/Simple_Form/Simple_Form_timestamp", "input");
-REF_TO_TYPE.put("User/User", "tab");
-REF_TO_TYPE.put("Control/Simple_Forms", "tab");
+REF_TO_TYPE.put("Control/Map/Create_Shape", "button");
+REF_TO_TYPE.put("Control/IDs/Create_Feature", "button");
+REF_TO_TYPE.put("Control/Search/Search_Term", "input");
+REF_TO_TYPE.put("Control/Search/Search_Button", "button");
+REF_TO_TYPE.put("Control/Search/Entity_Types", "dropdown");
+REF_TO_TYPE.put("Control/Search/Entity_List", "list");
+REF_TO_TYPE.put("Feature/Main/ID", "input");
+REF_TO_TYPE.put("Feature/Main/Feature_author", "input");
+REF_TO_TYPE.put("Feature/Main/Feature_timestamp", "input");
+REF_TO_TYPE.put("Feature/Main/Latitude", "input");
+REF_TO_TYPE.put("Feature/Main/Longitude", "input");
+REF_TO_TYPE.put("Feature/Main/Northing", "input");
+REF_TO_TYPE.put("Feature/Main/Easting", "input");
+REF_TO_TYPE.put("Feature/Main/Accuracy", "input");
+REF_TO_TYPE.put("Feature/Main/Take_From_GPS_1", "button");
+REF_TO_TYPE.put("Feature/Main/Feature_Type", "dropdown");
+REF_TO_TYPE.put("Feature/Main/Source", "dropdown");
+REF_TO_TYPE.put("Feature/Main/Note", "input");
+REF_TO_TYPE.put("Feature/Main/Go_To_Map", "input");
+REF_TO_TYPE.put("Feature/GControl/GC", "dropdown");
+REF_TO_TYPE.put("Feature/GControl/Date_Completed", "input");
+REF_TO_TYPE.put("Feature/GControl/Description", "input");
+REF_TO_TYPE.put("Feature/GControl/Classification", "dropdown");
+REF_TO_TYPE.put("Feature/GControl/Other_Description", "input");
+REF_TO_TYPE.put("Feature/GControl/Picture", "input");
+REF_TO_TYPE.put("Shape/Shape_Note/Label", "input");
+REF_TO_TYPE.put("Shape/Shape_Note/Note", "input");
+REF_TO_TYPE.put("User_List/User_List", "tab");
+REF_TO_TYPE.put("User_List/Manual", "tab");
 REF_TO_TYPE.put("Control/Map", "tab");
-REF_TO_TYPE.put("Simple_Form/Simple_Form", "tab");
+REF_TO_TYPE.put("Control/IDs", "tab");
+REF_TO_TYPE.put("Control/Search", "tab");
+REF_TO_TYPE.put("Feature/Main", "tab");
+REF_TO_TYPE.put("Feature/GControl", "tab");
+REF_TO_TYPE.put("Shape/Shape_Note", "tab");
 
-DATA_REFS.add("Simple_Form/Simple_Form/ID");
-DATA_REFS.add("Simple_Form/Simple_Form/Name");
-DATA_REFS.add("Simple_Form/Simple_Form/Latitude");
-DATA_REFS.add("Simple_Form/Simple_Form/Longitude");
-DATA_REFS.add("Simple_Form/Simple_Form/Northing");
-DATA_REFS.add("Simple_Form/Simple_Form/Easting");
-DATA_REFS.add("Simple_Form/Simple_Form/Accuracy");
-DATA_REFS.add("Simple_Form/Simple_Form/Dropdown");
-DATA_REFS.add("Simple_Form/Simple_Form/Simple_Form_timestamp");
+DATA_REFS.add("Feature/Main/ID");
+DATA_REFS.add("Feature/Main/Feature_author");
+DATA_REFS.add("Feature/Main/Feature_timestamp");
+DATA_REFS.add("Feature/Main/Latitude");
+DATA_REFS.add("Feature/Main/Longitude");
+DATA_REFS.add("Feature/Main/Northing");
+DATA_REFS.add("Feature/Main/Easting");
+DATA_REFS.add("Feature/Main/Accuracy");
+DATA_REFS.add("Feature/Main/Feature_Type");
+DATA_REFS.add("Feature/Main/Source");
+DATA_REFS.add("Feature/Main/Note");
+DATA_REFS.add("Feature/Main/Go_To_Map");
+DATA_REFS.add("Feature/GControl/GC");
+DATA_REFS.add("Feature/GControl/Date_Completed");
+DATA_REFS.add("Feature/GControl/Description");
+DATA_REFS.add("Feature/GControl/Classification");
+DATA_REFS.add("Feature/GControl/Other_Description");
+DATA_REFS.add("Feature/GControl/Picture");
+DATA_REFS.add("Shape/Shape_Note/Label");
+DATA_REFS.add("Shape/Shape_Note/Note");
 
 
 
@@ -183,14 +214,19 @@ DATA_REFS.add("Simple_Form/Simple_Form/Simple_Form_timestamp");
 
 
 
-TAB_GROUPS_AS_LIST.add("User");
+TAB_GROUPS_AS_LIST.add("User_List");
 TAB_GROUPS_AS_LIST.add("Control");
-TAB_GROUPS_AS_LIST.add("Simple_Form");
+TAB_GROUPS_AS_LIST.add("Feature");
+TAB_GROUPS_AS_LIST.add("Shape");
 
-TABS_AS_LIST.add("User/User");
-TABS_AS_LIST.add("Control/Simple_Forms");
+TABS_AS_LIST.add("User_List/User_List");
+TABS_AS_LIST.add("User_List/Manual");
 TABS_AS_LIST.add("Control/Map");
-TABS_AS_LIST.add("Simple_Form/Simple_Form");
+TABS_AS_LIST.add("Control/IDs");
+TABS_AS_LIST.add("Control/Search");
+TABS_AS_LIST.add("Feature/Main");
+TABS_AS_LIST.add("Feature/GControl");
+TABS_AS_LIST.add("Shape/Shape_Note");
 
 
 
@@ -307,7 +343,7 @@ boolean hasMediaType(String ref) {
 
 boolean isFlaggedNodata(String tabGroup) {
   List flaggedTabGroups = new ArrayList();
-  flaggedTabGroups.add("User");
+  flaggedTabGroups.add("User_List");
   flaggedTabGroups.add("Control");
   return flaggedTabGroups.contains(tabGroup);
 }
@@ -993,12 +1029,15 @@ void timedPopulateCursorList(String ref, String q, int limit) {
 
 void setUpTypeHierarchy() {
   //- 
-  //  - Simple Form
+  //  - Feature
+  //  - Shape
 
   n0 = Tree("", 1);
-  n1 = Tree("Simple Form", 1);
+  n1 = Tree("Feature", 1);
+  n2 = Tree("Shape", 1);
 
   n0.addChild(n1);
+  n0.addChild(n2);
 
 
   PERF_TYPE_TREE = n0;
@@ -1605,17 +1644,26 @@ void setFieldValueFromLocalSettings(String ref) {
   setFieldValueFromLocalSettings(ref, false);
 }
 
-void setFieldValueFromLocalSettingsOnShow(
+void setFieldValueFromLocalSettingsOnEvent(
     String ref,
     boolean doOverwrite,
-    String defaultVal
+    String defaultVal,
+    String event
 ) {
   String cb = fun2str(
       "setFieldValueFromLocalSettings",
       new Object[]{ref, doOverwrite, defaultVal}
   );
 
-  addOnEvent(getTabGroupRef(ref), "show", cb);
+  addOnEvent(getTabGroupRef(ref), event, cb);
+}
+
+void setFieldValueFromLocalSettingsOnShow(
+    String ref,
+    boolean doOverwrite,
+    String defaultVal
+) {
+  setFieldValueFromLocalSettingsOnEvent(ref, doOverwrite, defaultVal, "show");
 }
 
 void setFieldValueFromLocalSettingsOnShow(String ref, boolean doOverwrite) {
@@ -1631,8 +1679,15 @@ void setFieldValueFromLocalSettingsOnShow(String ref, boolean doOverwrite) {
  * be so if the call is made in the autogenerator's `logic` tags.
  */
 void persistOverSessions(String ref, boolean doOverwrite, String defaultVal) {
-  setFieldValueFromLocalSettingsOnShow(ref, doOverwrite, defaultVal);
-  insertIntoLocalSettingsOnChange     (ref);
+  String tabGroupRef = getTabGroupRef(ref);
+  boolean isData = !isFlaggedNodata(tabGroupRef);
+
+  String event;
+  if (isData) event = "create";
+  else        event = "show";
+
+  setFieldValueFromLocalSettingsOnEvent(ref, doOverwrite, defaultVal, event);
+  insertIntoLocalSettingsOnChange      (ref);
 }
 
 void persistOverSessions(String ref, boolean doOverwrite) {
@@ -1648,7 +1703,8 @@ void persistOverSessions(String ref) {
   persistOverSessions(ref, false, (String) null);
 }
 
-
+persistOverSessions("Feature/Main/Feature_Type", false);
+persistOverSessions("Feature/Main/Source", false);
 
 /******************************************************************************/
 /*                           FIELD COPYING HELPERS                            */
@@ -2494,8 +2550,8 @@ String getTimestampNow(String fmt) {
 void populateAuthorAndTimestamp(String tabgroup) {
   Map tabgroupToAuthor    = new HashMap();
   Map tabgroupToTimestamp = new HashMap();
-  
-  tabgroupToTimestamp.put("Simple_Form", "Simple_Form/Simple_Form/Simple_Form_timestamp");
+  tabgroupToAuthor.put("Feature", "Feature/Main/Feature_author");
+  tabgroupToTimestamp.put("Feature", "Feature/Main/Feature_timestamp");
   String authorPath    = tabgroupToAuthor.get(tabgroup);
   String timestampPath = tabgroupToTimestamp.get(tabgroup);
 
@@ -2503,19 +2559,29 @@ void populateAuthorAndTimestamp(String tabgroup) {
   if (!isNull(timestampPath)) setFieldValue(timestampPath, getTimestampNow());
 }
 
-void onShowSimpleForm () {
-  saveTabGroup("Simple_Form");
+void onShowFeature () {
+  saveTabGroup("Feature");
 }
 
-addOnEvent("Simple_Form", "show", "onShowSimpleForm()");
+void onShowShape () {
+  saveTabGroup("Shape");
+}
 
-void onClickUserUserList () {
+addOnEvent("Feature", "show", "onShowFeature()");
+addOnEvent("Shape", "show", "onShowShape()");
+
+void onClickUserListUserList () {
   newTab("Control", true);
 }
 
-void onClickControlNewSimpleForm () {
+void onClickControlCreateShape () {
   parentTabgroup__ = "Control";
-  newSimpleForm();
+  newShape();
+}
+
+void onClickControlCreateFeature () {
+  parentTabgroup__ = "Control";
+  newFeature();
 }
 
 
@@ -2525,8 +2591,9 @@ void onClickControlNewSimpleForm () {
 
 
 
-addOnEvent("User/User/User_List", "click", "onClickUserUserList()");
-addOnEvent("Control/Simple_Forms/New_Simple_Form", "click", "onClickControlNewSimpleForm()");
+addOnEvent("User_List/User_List/User_List", "click", "onClickUserListUserList()");
+addOnEvent("Control/Map/Create_Shape", "click", "onClickControlCreateShape()");
+addOnEvent("Control/IDs/Create_Feature", "click", "onClickControlCreateFeature()");
 
 /******************************************************************************/
 /*                   AUDIO, CAMERA, FILE AND VIDEO BINDINGS                   */
@@ -2820,8 +2887,8 @@ void loadEntityFrom(String entityID, String onFail) {
 }
 
 
-void newSimpleForm(String parent){
-  String tabgroup = "Simple_Form";
+void newFeature(String parent){
+  String tabgroup = "Feature";
   if (!isNull(parent)) {
     triggerAutoSave();
     parentTabgroup   = parent;
@@ -2838,11 +2905,33 @@ void newSimpleForm(String parent){
   executeOnEvent(tabgroup, "create");
 }
 
-void newSimpleForm (){
-  newSimpleForm(null);
+void newFeature (){
+  newFeature(null);
 }
-void duplicateSimpleForm(){
-  String tabgroup = "Simple_Form";
+
+void newShape(String parent){
+  String tabgroup = "Shape";
+  if (!isNull(parent)) {
+    triggerAutoSave();
+    parentTabgroup   = parent;
+    parentTabgroup__ = parent;
+  }
+  
+
+  setUuid(tabgroup, null);
+  newTabGroup(tabgroup);
+  populateAuthorAndTimestamp(tabgroup);
+  populateEntityListsInTabGroup(tabgroup);
+  
+
+  executeOnEvent(tabgroup, "create");
+}
+
+void newShape (){
+  newShape(null);
+}
+void duplicateFeature(){
+  String tabgroup = "Feature";
   String uuidOld = getUuid(tabgroup);
   setUuid(tabgroup, "");
   disableAutoSave(tabgroup);
@@ -2888,34 +2977,92 @@ void duplicateSimpleForm(){
     }
   });
 }
-addOnEvent("Simple_Form", "save", "populateEntityListsOfArchEnt(\"Simple_Form\")");
+void duplicateShape(){
+  String tabgroup = "Shape";
+  String uuidOld = getUuid(tabgroup);
+  setUuid(tabgroup, "");
+  disableAutoSave(tabgroup);
+  
+  clearGpsInTabGroup(tabgroup);
+  populateAuthorAndTimestamp(tabgroup);
+  populateEntityListsInTabGroup(tabgroup);
+  
+  executeOnEvent(tabgroup, "copy");
+
+  saveCallback = new SaveCallback() {
+    onSave(uuid, newRecord) {
+      setUuid(tabgroup, uuid);
+
+      timedFetchAll(getDuplicateRelnQuery(uuidOld), new FetchCallback(){
+        onFetch(result) {
+          Log.e("Module", result.toString());
+
+          if (result != null && result.size() >= 1) {
+            parentTabgroup__ = result.get(0).get(4);
+            parentTabgroup__ = parentTabgroup__.replaceAll(" ", "_");
+          }
+
+          makeDuplicateRelationships(result, getUuid(tabgroup));
+
+          showToast("{Duplicated_record}");
+          dialog.dismiss();
+        }
+      });
+
+      saveTabGroup(tabgroup);
+    }
+  };
+
+  String extraDupeAttributes = "";
+  timedFetchAll(getDuplicateAttributeQuery(uuidOld, extraDupeAttributes), new FetchCallback(){
+    onFetch(result) {
+      excludeAttributes = new ArrayList();
+
+      
+
+      duplicateTabGroup(tabgroup, null, getExtraAttributes(result), excludeAttributes, saveCallback);
+    }
+  });
+}
+addOnEvent("Feature", "save", "populateEntityListsOfArchEnt(\"Feature\")");
+addOnEvent("Shape", "save", "populateEntityListsOfArchEnt(\"Shape\")");
 
 void doNotDelete(){
   showToast("{Delete_Cancelled}");
 }
 
-addOnEvent("User", "show", "removeNavigationButtons()");
+addOnEvent("User_List", "show", "removeNavigationButtons()");
 addOnEvent("Control", "show", "removeNavigationButtons()");
-addOnEvent("Simple_Form", "show", "removeNavigationButtons()");
-addOnEvent("Simple_Form", "show", "addNavigationButtons(\"Simple_Form\")");
+addOnEvent("Feature", "show", "removeNavigationButtons()");
+addOnEvent("Shape", "show", "removeNavigationButtons()");
+addOnEvent("Feature", "show", "addNavigationButtons(\"Feature\")");
+addOnEvent("Shape", "show", "addNavigationButtons(\"Shape\")");
 
 /******************************************************************************/
 /*                                   SEARCH                                   */
 /******************************************************************************/
+addOnEvent("Control/Search"               , "show"  , "search()");
+addOnEvent("Control/Search/Entity_List"   , "click" , "loadEntity();");
+addOnEvent("Control/Search/Search_Button" , "click" , "search()");
+addOnEvent("Control/Search/Search_Term"   , "click" , "clearSearch()");
 
-
-
+addOnEvent("Control/Search/Entity_Types"  , "click" , "search()");
+entityTypes = new ArrayList();
+entityTypes.add(new NameValuePair("{All}", ""));
+entityTypes.add(new NameValuePair("{Feature}", "Feature"));
+entityTypes.add(new NameValuePair("{Shape}", "Shape"));
+populateDropDown("Control/Search/Entity_Types", entityTypes);
 
 void clearSearch(){
-  setFieldValue("/Search/Search_Term","");
+  setFieldValue("Control/Search/Search_Term","");
 }
 
 void search(){
-  String refEntityList  = "/Search/Entity_List";
-  String refSearchTerm  = "/Search/Search_Term";
-  String refEntityTypes = "/Search/Entity_Types";
+  String refEntityList  = "Control/Search/Entity_List";
+  String refSearchTerm  = "Control/Search/Search_Term";
+  String refEntityTypes = "Control/Search/Entity_Types";
 
-  String type = "";
+  String type = getFieldValue(refEntityTypes);
   String term = getFieldValue(refSearchTerm);
   String searchQuery = "SELECT uuid, response "+
                        "  FROM latestNonDeletedArchEntFormattedIdentifiers  "+
@@ -2932,13 +3079,28 @@ void search(){
   searchQuery = dbReplaceFirst(searchQuery, "{type}", type);
 
   populateCursorList(refEntityList, searchQuery, 25);
-  refreshTabgroupCSS("");
+  refreshTabgroupCSS("Control");
 
   Log.d("Module", "Search query: " + searchQuery);
 }
 
-void loadSimpleFormFrom(String uuid) {
-  String tabgroup = "Simple_Form";
+void loadFeatureFrom(String uuid) {
+  String tabgroup = "Feature";
+  setUuid(tabgroup, uuid);
+  if (isNull(uuid)) return;
+
+  FetchCallback cb = new FetchCallback() {
+    onFetch(result) {
+      populateEntityListsInTabGroup(tabgroup);
+      executeOnEvent(tabgroup, "fetch");
+    }
+  };
+
+  executeOnEvent(tabgroup, "prefetch");
+  showTabGroup(tabgroup, uuid, cb);
+}
+void loadShapeFrom(String uuid) {
+  String tabgroup = "Shape";
   setUuid(tabgroup, uuid);
   if (isNull(uuid)) return;
 
@@ -2956,11 +3118,11 @@ void loadSimpleFormFrom(String uuid) {
 /******************************************************************************/
 /*                          TAKE FROM GPS BUTTON(S)                           */
 /******************************************************************************/
-addOnEvent("Simple_Form/Simple_Form/Take_From_GPS_1", "click", "takePoint(\"Simple_Form\")");
+addOnEvent("Feature/Main/Take_From_GPS_1", "click", "takePoint(\"Feature\")");
 
 Map getTakeFromGpsMappings() {
   Map tabgroupToTabRef = new HashMap();
-  tabgroupToTabRef.put("Simple_Form", "Simple_Form/Simple_Form");
+  tabgroupToTabRef.put("Feature", "Feature/Main");
   return tabgroupToTabRef;
 }
 
@@ -3270,12 +3432,7 @@ String getEntityMenuPopulationFunction(String[] menuDescriptor) {
 }
 
 ENTITY_MENUS = new ArrayList();
-ENTITY_MENUS.add(new String[] {
-    "Control/Simple_Forms/Existing_Simple_Forms",
-    "getUuid(\"Control\")",
-    "Simple Form",
-    ""
-});
+
 for (m : ENTITY_MENUS) {
   String functionCall = getEntityMenuPopulationFunction(m);
   execute(functionCall);
@@ -3291,14 +3448,132 @@ for (m : ENTITY_MENUS) {
   addOnEvent(ref, evt, cmd);
 }
 
-addOnEvent("Control/Simple_Forms/Existing_Simple_Forms", "click", "loadEntity()");
+
 /******************************************************************************/
 /*                             HANDWRITTEN LOGIC                              */
 /******************************************************************************/
 
-/****************************** GIS POINT STYLES ******************************/
+/************************************ MAP *************************************/
 final String MAP_REF = "Control/Map/Map";
 
+DATA_ENTRY_LAYER    = "Data Entry Layer";
+DATA_ENTRY_LAYER_ID = 0;
+
+// Copy/pasted from autogenerator's definition of saveTabGroup
+void saveShape() {
+  String  tabgroup            = "Shape";
+  Boolean enableAutosave      = true;
+  String  id                  = getUuid(tabgroup);
+  List    geometry            = getGeometryList(MAP_REF, DATA_ENTRY_LAYER_ID);
+  List    attributes          = null;
+  String  parentTabgroup_     = parentTabgroup;
+  String  parentTabgroupUuid_ = getUuid(parentTabgroup_);
+  Boolean userWasSet          = !username.equals("");
+
+  String callback = "";
+  callback += "; clearGeometry()";
+  callback += "; onSave" + getArchEntTypePascalCased(tabgroup) + "__()";
+
+  parentTabgroup = null;
+
+  SaveCallback saveCallback  = new SaveCallback() {
+    onSave(uuid, newRecord) {
+      setUuid(tabgroup, uuid);
+      // Make a child-parent relationship if need be.
+      if (
+          newRecord &&
+          !isNull(parentTabgroup_) &&
+          !isNull(parentTabgroupUuid_)
+      ) {
+        String rel = "";
+        rel += parentTabgroup_.replaceAll("_", " ");
+        rel += " - ";
+        rel += tabgroup.replaceAll("_", " ");
+        saveEntitiesToHierRel(
+          rel,
+          parentTabgroupUuid_,
+          uuid,
+          "Parent Of",
+          "Child Of",
+          callback
+        );
+      } else {
+        execute(callback);
+      }
+
+      // This fixes an interesting bug. Without this, if a user was not set
+      // (by calling `setUser`) at the time `saveShape` was first called, but
+      // set by the time `onSave` was called, the tab group is saved correctly
+      // the first time only.
+      //
+      // Adding this allows subsequent saves to succeed. Presumably it plays
+      // some role in helping FAIMS associate the correct user with a record.
+      if (!userWasSet) {
+        saveShape();
+      }
+
+    }
+    onError(message) {
+      showToast(message);
+    }
+  };
+
+  saveTabGroup(tabgroup, id, geometry, attributes, saveCallback, enableAutosave);
+}
+
+void clearGeometry() {
+  List    geometry = getGeometryList(MAP_REF, DATA_ENTRY_LAYER_ID);
+
+  if (geometry == null)     return;
+  if (geometry.size() == 0) return;
+
+  for (geom : geometry) {
+    print("Geometry cleared:" + geom.userData.geomId);
+    clearGeometry(MAP_REF, geom.userData.geomId);
+  }
+}
+
+boolean checkForGeometry() {
+  List geometry = getGeometryList(MAP_REF, DATA_ENTRY_LAYER_ID);
+  if (geometry == null || geometry.size() == 0) {
+    String head = "Cannot Create Shape";
+    String body = "At least one shape must be present on the data entry layer.";
+    showWarning(head, body);
+
+    return false;
+  } else {
+    return true;
+  }
+}
+
+void centreMe() {
+  if(!isExternalGPSOn() && !isInternalGPSOn()) {
+    showToast("{GPS_Not_Initialised}");
+  } else {
+    centerOnCurrentPosition(MAP_REF);
+  }
+}
+
+void refreshMap() {
+  refreshMap(MAP_REF);
+}
+
+// Overrides autogenerated definition
+void onClickControlCreateShape () {
+  if (checkForGeometry()) {
+    parentTabgroup__ = "Control";
+    newShape();
+  }
+}
+
+// Overrides autogenerated definition
+void onShowShape () {
+  saveShape();
+}
+
+addOnEvent("Control/Map", "show",  "refreshMap()");
+
+/****************************** GIS POINT STYLES ******************************/
 /* Displays the geometry of each entity whose menu, by the name of `attribName`,
  * has `vocabName` saved in it. The geometry is displayed in whatever colour is
  * given by `geoColor`.
@@ -3365,14 +3640,44 @@ void showDatabaseLayerByVocabName(String vocabName, int geoColor) {
   showDatabaseLayerByVocabName(vocabName, geoColor, layerName);
 }
 
+void showDatabaseLayerByVocabName(
+    String attribName,
+    String vocabName,
+    int    geoColor
+) {
+  String layerName = guessArch16nValFromKey(vocabName);
+  showDatabaseLayerByVocabName(attribName, vocabName, geoColor, layerName);
+}
+
+/********************************** MAP INIT **********************************/
+
 void initMap() {
   // showBaseMap(MAP_REF, "Base Map", "files/data/R1980_YambolElhovoExt.tif");
 
-  showDatabaseLayerByVocabName("{Yes}",  Color.BLUE);
-  showDatabaseLayerByVocabName("{No}",   Color.CYAN);
-  showDatabaseLayerByVocabName("{FAIL}", Color.GREEN);
+  showDatabaseLayerByVocabName(
+          "GControl", "{Yes}",                  Color.GREEN);
+  showDatabaseLayerByVocabName(
+          "GControl", "{Attempted_and_Failed}", Color.YELLOW);
+  showDatabaseLayerByVocabName(
+          "GControl", "{No}",                   Color.RED);
+  showDatabaseLayerByVocabName(
+          "GControl", "{No_Observation}",       Color.BLUE);
 
-  setMapZoom(MAP_REF, 13.0f);
+  setMapZoom(MAP_REF, 15.0f);
+
+  // Shape
+  isEntity = true;
+  queryName = "Shape";
+  querySQL = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Shape'";
+  ps = createPointStyle(10, Color.YELLOW, 0.2f, 0.5f);
+  ls = createLineStyle(10, Color.YELLOW, 0.05f, 0.3f, null);
+  pos = createPolygonStyle(10, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
+  ts = createTextStyle(10, Color.YELLOW, 30, Typeface.SANS_SERIF);
+  showDatabaseLayer(MAP_REF, "Shape Layer", isEntity, queryName, querySQL, ps, ls, pos, ts);
+
+  // Data entry layer
+  DATA_ENTRY_LAYER_ID = createCanvasLayer(MAP_REF, DATA_ENTRY_LAYER);
+  setSelectedLayer(MAP_REF, DATA_ENTRY_LAYER);
 }
 
 initMap();
