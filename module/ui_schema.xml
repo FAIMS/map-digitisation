@@ -27,14 +27,35 @@
             </Manual>
           </User_List>
           <Control>
-            <Map>
-              <Map/>
-              <Center_Me_1/>
-              <Create_Shape/>
-            </Map>
             <IDs>
               <Create_Feature/>
+              <Next_Point_ID/>
+              <Next_Line_ID/>
+              <Next_Polygon_ID/>
             </IDs>
+            <Map>
+              <Map/>
+              <Colgroup_A>
+                <Col_0>
+                  <Center_Me_1/>
+                </Col_0>
+                <Col_1>
+                  <Create_Shape/>
+                </Col_1>
+              </Colgroup_A>
+              <Select_User/>
+              <Colgroup_1>
+                <Col_1>
+                  <GC_Value/>
+                </Col_1>
+                <Col_2>
+                  <Colour_to_Assign/>
+                </Col_2>
+                <Col_3>
+                  <Assign_Colour/>
+                </Col_3>
+              </Colgroup_1>
+            </Map>
             <Search>
               <Colgroup_0>
                 <Col_0>
@@ -44,9 +65,20 @@
                   <Search_Button/>
                 </Col_1>
               </Colgroup_0>
-              <Entity_Types/>
+              <Colgroup_1>
+                <Col_0>
+                  <Entity_Types/>
+                </Col_0>
+                <Col_1>
+                  <Select_User/>
+                </Col_1>
+              </Colgroup_1>
+              <Select_User/>
               <Entity_List/>
             </Search>
+            <Vars>
+              <Create_Shape/>
+            </Vars>
           </Control>
           <Feature>
             <Main>
@@ -73,10 +105,10 @@
                 </Col_3>
               </Colgroup_2>
               <Take_From_GPS_1/>
+              <Find_This_in_The_Map/>
               <Feature_Type/>
               <Source/>
               <Note/>
-              <Go_To_Map/>
             </Main>
             <GControl>
               <GC/>
@@ -85,16 +117,24 @@
               <Classification/>
               <Other_Description/>
               <Picture/>
+              <Picture_Button_1/>
             </GControl>
           </Feature>
           <Shape>
             <Shape_Note>
+              <Point_ID/>
+              <Line_ID/>
+              <Polygon_ID/>
               <Label/>
               <Note/>
             </Shape_Note>
           </Shape>
         </faims>
       </instance>
+      <bind nodeset="/faims/Control/IDs/Next_Point_ID" type="decimal"/>
+      <bind nodeset="/faims/Control/IDs/Next_Line_ID" type="decimal"/>
+      <bind nodeset="/faims/Control/IDs/Next_Polygon_ID" type="decimal"/>
+      <bind nodeset="/faims/Feature/GControl/Date_Completed" type="date"/>
     </model>
   </h:head>
   <h:body>
@@ -142,23 +182,70 @@
     </group>
     <group ref="Control">
       <label>{Control}</label>
-      <group ref="Map" faims_scrollable="false">
-        <label>{Map}</label>
-        <input faims_map="true" ref="Map">
-          <label/>
-        </input>
-        <trigger ref="Center_Me_1">
-          <label>{Center_Me}</label>
-        </trigger>
-        <trigger ref="Create_Shape">
-          <label>{Create_Shape}</label>
-        </trigger>
-      </group>
       <group ref="IDs">
         <label>{IDs}</label>
         <trigger ref="Create_Feature">
           <label>{Create_Feature}</label>
         </trigger>
+        <input ref="Next_Point_ID">
+          <label>{Next_Point_ID}</label>
+        </input>
+        <input ref="Next_Line_ID">
+          <label>{Next_Line_ID}</label>
+        </input>
+        <input ref="Next_Polygon_ID">
+          <label>{Next_Polygon_ID}</label>
+        </input>
+      </group>
+      <group ref="Map" faims_scrollable="false">
+        <label>{Map}</label>
+        <input faims_map="true" ref="Map">
+          <label/>
+        </input>
+        <group ref="Colgroup_A" faims_style="orientation">
+          <label/>
+          <group ref="Col_0" faims_style="even">
+            <label/>
+            <trigger ref="Center_Me_1">
+              <label>{Center_Me}</label>
+            </trigger>
+          </group>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <trigger ref="Create_Shape">
+              <label>{Create_Shape}</label>
+            </trigger>
+          </group>
+        </group>
+        <group ref="Colgroup_1" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <select1 ref="GC_Value">
+              <label>{GC_Value}</label>
+              <item>
+                <label>Options not loaded</label>
+                <value>Options not loaded</value>
+              </item>
+            </select1>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <select1 ref="Colour_to_Assign">
+              <label>{Colour_to_Assign}</label>
+              <item>
+                <label>Options not loaded</label>
+                <value>Options not loaded</value>
+              </item>
+            </select1>
+          </group>
+          <group ref="Col_3" faims_style="even">
+            <label/>
+            <trigger ref="Assign_Colour">
+              <label>{Assign_Colour}</label>
+            </trigger>
+          </group>
+        </group>
       </group>
       <group ref="Search" faims_scrollable="false">
         <label>{Search}</label>
@@ -177,13 +264,29 @@
             </trigger>
           </group>
         </group>
-        <select1 ref="Entity_Types">
-          <label>{Entity_Types}</label>
-          <item>
-            <label>Options not loaded</label>
-            <value>Options not loaded</value>
-          </item>
-        </select1>
+        <group ref="Colgroup_1" faims_style="orientation">
+          <label/>
+          <group ref="Col_0" faims_style="even">
+            <label/>
+            <select1 ref="Entity_Types">
+              <label>{Entity_Types}</label>
+              <item>
+                <label>Options not loaded</label>
+                <value>Options not loaded</value>
+              </item>
+            </select1>
+          </group>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <select1 ref="Select_User">
+              <label>{Select_User}</label>
+              <item>
+                <label>Options not loaded</label>
+                <value>Options not loaded</value>
+              </item>
+            </select1>
+          </group>
+        </group>
         <select1 appearance="compact" ref="Entity_List">
           <label>{Entity_List}</label>
           <item>
@@ -192,12 +295,18 @@
           </item>
         </select1>
       </group>
+      <group ref="Vars" faims_hidden="true">
+        <label>{Vars}</label>
+        <trigger ref="Create_Shape">
+          <label>{Create_Shape}</label>
+        </trigger>
+      </group>
     </group>
     <group ref="Feature" faims_archent_type="Feature">
       <label>{Feature}</label>
       <group ref="Main">
         <label>{Main}</label>
-        <input faims_attribute_name="ID" faims_attribute_type="measure" ref="ID">
+        <input faims_attribute_name="ID" faims_attribute_type="measure" ref="ID" faims_style_class="readonly">
           <label>{ID}</label>
         </input>
         <input faims_attribute_name="Feature author" faims_attribute_type="measure" ref="Feature_author" faims_read_only="true">
@@ -245,6 +354,9 @@
         <trigger ref="Take_From_GPS_1">
           <label>{Take_From_GPS}</label>
         </trigger>
+        <trigger ref="Find_This_in_The_Map">
+          <label>{Find_This_in_The_Map___}</label>
+        </trigger>
         <select1 faims_attribute_name="Feature Type" faims_attribute_type="vocab" ref="Feature_Type">
           <label>{Feature_Type}</label>
           <item>
@@ -261,9 +373,6 @@
         </select1>
         <input faims_attribute_name="Note" faims_attribute_type="measure" ref="Note">
           <label>{Note}</label>
-        </input>
-        <input faims_attribute_name="Go To Map" faims_attribute_type="measure" ref="Go_To_Map">
-          <label>{Go_To_Map}</label>
         </input>
       </group>
       <group ref="GControl">
@@ -291,15 +400,31 @@
         <input faims_attribute_name="Other Description" faims_attribute_type="measure" ref="Other_Description">
           <label>{Other_Description}</label>
         </input>
-        <input faims_attribute_name="Picture" faims_attribute_type="measure" ref="Picture">
+        <select faims_sync="true" type="camera" faims_attribute_name="Picture" faims_attribute_type="measure" ref="Picture">
           <label>{Picture}</label>
-        </input>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select>
+        <trigger ref="Picture_Button_1">
+          <label>{Picture}</label>
+        </trigger>
       </group>
     </group>
     <group ref="Shape" faims_archent_type="Shape">
       <label>{Shape}</label>
       <group ref="Shape_Note">
         <label>{Shape_Note}</label>
+        <input faims_attribute_name="Point ID" faims_attribute_type="measure" ref="Point_ID" faims_read_only="true">
+          <label>{Point_ID}</label>
+        </input>
+        <input faims_attribute_name="Line ID" faims_attribute_type="measure" ref="Line_ID" faims_read_only="true">
+          <label>{Line_ID}</label>
+        </input>
+        <input faims_attribute_name="Polygon ID" faims_attribute_type="measure" ref="Polygon_ID" faims_read_only="true">
+          <label>{Polygon_ID}</label>
+        </input>
         <input faims_attribute_name="Label" faims_attribute_type="measure" ref="Label">
           <label>{Label}</label>
         </input>

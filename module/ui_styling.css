@@ -4,3 +4,6 @@
 .required-label {
   color: red;
 }
+.readonly {
+  color: #B2B2B2;
+}

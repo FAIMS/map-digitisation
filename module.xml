@@ -1,41 +1,302 @@
+<!--@POSTPROC: ./postproc.sh-->
 <module>
-
-<User f="nodata">
-  <User f="noscroll">
-    <User_List t="list" f="user" l="Control"/>
-  </User>
-</User>
+<User_List f="nodata">
+  <User_List f="noscroll">
+    <User_List t="list" f="nolabel user" l="Control"/>
+  </User_List>
+  <Manual>
+    <Manual t="webview" f="nolabel"/>
+  </Manual>
+</User_List>
 
 <Control f="nodata">
-  <Simple_Forms f="noscroll">
-    <New_Simple_Form l="Simple_Form"/>
-    <Existing_Simple_Forms t="list" e="Simple_Form"/>
-  </Simple_Forms>
+  <IDs>
+    <Create_Feature l="Feature"/>
+    <Next_Point_ID b="decimal"/>
+    <Next_Line_ID b="decimal"/>
+    <Next_Polygon_ID b="decimal"/>
+  </IDs>
   <Map f="noscroll">
+    <!--SRID: 32635-->
     <Map t="map" f="nolabel"/>
+    <!--<Create_Shape l="Shape"/>      Added via @POSTPROC, but in columns-->
+    <cols>
+      <GC_Value t="dropdown" vp="Feature/GControl/GC"/>
+      <Colour_to_Assign t="dropdown">
+        <!--Populated in logic-->
+      </Colour_to_Assign>
+      <Assign_Colour t="button"/>
+    </cols>
   </Map>
+  <search>
+    <!--"Select User" dropdown has been added usin @POSTPROC-->
+  </search>
+  <Vars f="hidden nowire">
+    <Create_Shape l="Shape"/>
+  </Vars>
 </Control>
 
-<Simple_Form>
-  <fmt>{{ID}}</fmt>
-  <Simple_Form>
-    <ID/>
-    <Name/>
+<Feature>
+  <fmt>{{ID}} {{author}}</fmt>
+  <Main>
+    <ID c="readonly"/>
+    <author/>
+    <timestamp/>
     <gps/>
-    <Dropdown>
+    <Find_This_in_The_Map l="Control/Map">
+      Find This in The Map...
+    </Find_This_in_The_Map>
+    <Feature_Type f="persist">
+      <desc>Comment on Feature type</desc>
+      <opts>
+        <opt>Mound</opt>
+        <opt>Surface feature</opt>
+        <opt>Artefact concentration</opt>
+        <opt>Other</opt>
+      </opts>
+    </Feature_Type>
+    <Source f="persist">
+      <opts>
+        <opt>Topomap</opt>
+        <opt>Atlas</opt>
+        <opt>GC</opt>
+        <opt>Field survey</opt>
+      </opts>
+    </Source>
+    <Note/>
+  </Main>
+  <GControl>
+    <GC>
       <opts>
         <opt>Yes</opt>
+        <opt>Attempted and Failed</opt>
         <opt>No</opt>
-        <opt>FAIL</opt>
+        <opt>No Observation</opt>
       </opts>
-    </Dropdown>
-    <timestamp/>
-  </Simple_Form>
-</Simple_Form>
+    </GC>
+    <Date_Completed b="date"/>
+    <Description/>
+    <Classification>
+      <opts>
+        <opt>TP</opt>
+        <opt>FP</opt>
+        <opt>FN</opt>
+        <opt>FP</opt>
+        <opt>Indeterminate</opt>
+        <opt>Classificaiton Error</opt>
+      </opts>
+    </Classification>
+    <Other_Description>
+      <desc>Comment on any issues surrounding GC. E.g. Feature not found. Feature offset</desc>
+    </Other_Description>
+    <Picture f="nocertainty" t="camera"/>
+  </GControl>
+</Feature>
+
+<Shape>
+  <fmt>{{Point_ID}}{{Line_ID}}{{Polygon_ID}} {{Label}}</fmt>
+  <Shape_Note>
+    <Point_ID f="readonly"/>
+    <Line_ID f="readonly"/>
+    <Polygon_ID f="readonly"/>
+    <Label/>
+    <Note/>
+  </Shape_Note>
+</Shape>
 
 <logic><![CDATA[
-/****************************** GIS POINT STYLES ******************************/
+/************************************ MAP *************************************/
 final String MAP_REF = "Control/Map/Map";
+String DATA_ENTRY_LAYER;
+int    DATA_ENTRY_LAYER_ID;
+
+void clearGeometry() {
+  List    geometry = getGeometryList(MAP_REF, DATA_ENTRY_LAYER_ID);
+
+  if (geometry == null)     return;
+  if (geometry.size() == 0) return;
+
+  for (geom : geometry) {
+    print("Geometry cleared:" + geom.userData.geomId);
+    clearGeometry(MAP_REF, geom.userData.geomId);
+  }
+}
+
+boolean checkForGeometry() {
+  List geometry = getGeometryList(MAP_REF, DATA_ENTRY_LAYER_ID);
+  if (geometry == null || geometry.size() == 0) {
+    String head = "Cannot Create Shape";
+    String body = "At least one shape must be present on the data entry layer.";
+    showWarning(head, body);
+
+    return false;
+  } else {
+    return true;
+  }
+}
+
+void centreMe() {
+  if(!isExternalGPSOn() && !isInternalGPSOn()) {
+    showToast("{GPS_Not_Initialised}");
+  } else {
+    centerOnCurrentPosition(MAP_REF);
+  }
+}
+
+void refreshMap() {
+  refreshMap(MAP_REF);
+}
+
+boolean findThisInTheMap() {
+  String lonStr = getFieldValue("Feature/Main/Longitude");
+  String latStr = getFieldValue("Feature/Main/Latitude");
+
+  boolean isFindable = !isNull(lonStr) && !isNull(latStr);
+  if (!isFindable) {
+    String head = "Cannot Find Point in Map";
+    String body = "The 'Latitude' and 'Longitude' fields must be filled in.";
+    showWarning(head, body);
+    return false;
+  }
+
+  double lonDub = Double.parseDouble(lonStr);
+  double latDub = Double.parseDouble(latStr);
+
+  setMapFocusPoint(MAP_REF, lonDub, latDub);
+  return true;
+}
+
+addOnEventCond("Feature/Main/Find_This_in_The_Map", "click", "findThisInTheMap()");
+
+addOnEventCond("Control/Map/Create_Shape", "click", "checkForGeometry()");
+addOnEvent    ("Control/Map/Create_Shape", "click", "onClickControlCreateShape()");
+
+addOnEvent(
+    "Control/Map/Create_Shape",
+    "click",
+    "setAutoSaveGeometry(getGeometryList(MAP_REF, DATA_ENTRY_LAYER_ID))",
+    Integer.MAX_VALUE
+);
+
+addOnEvent("Shape", "save", "clearGeometry()");
+
+addOnEvent("Control/Map", "show",  "refreshMap()");
+addOnEvent("Control/Map", "show",  "redrawGcValueLayers()");
+
+/**************************** SHAPE AUTONUMBERING *****************************/
+
+AUTONUM_DEST_TO_SOURCE.put("Shape/Shape_Note/Point_ID",   "Control/IDs/Next_Point_ID");
+AUTONUM_DEST_TO_SOURCE.put("Shape/Shape_Note/Line_ID",    "Control/IDs/Next_Line_ID");
+AUTONUM_DEST_TO_SOURCE.put("Shape/Shape_Note/Polygon_ID", "Control/IDs/Next_Polygon_ID");
+
+for (String ref : AUTONUM_DEST_TO_SOURCE.values())
+  persistOverSessions(ref, "1");
+
+boolean geoListHasInstanceOf(Class clazz) {
+  List geometry = getGeometryList(MAP_REF, DATA_ENTRY_LAYER_ID);
+  for (Geometry g : geometry)
+    if (clazz.isInstance(g))
+      return true;
+  return false;
+}
+
+void incShapeAutoNum() {
+  String refPoint = "Shape/Shape_Note/Point_ID";
+  String refLine  = "Shape/Shape_Note/Line_ID";
+  String refPoly  = "Shape/Shape_Note/Polygon_ID";
+
+  if (geoListHasInstanceOf(Point  .class)) incAutoNum(refPoint);
+  if (geoListHasInstanceOf(Line   .class)) incAutoNum(refLine);
+  if (geoListHasInstanceOf(Polygon.class)) incAutoNum(refPoly);
+}
+
+addOnEvent("Shape", "create", "incShapeAutoNum()");
+
+/*********************************** COLORS ***********************************/
+
+Map COLOR_TO_NAME = new HashMap();
+COLOR_TO_NAME.put(Color.BLACK,       "Black");
+COLOR_TO_NAME.put(Color.BLUE,        "Blue");
+COLOR_TO_NAME.put(Color.CYAN,        "Cyan");
+COLOR_TO_NAME.put(Color.DKGRAY,      "Dkgray");
+COLOR_TO_NAME.put(Color.GRAY,        "Gray");
+COLOR_TO_NAME.put(Color.GREEN,       "Green");
+COLOR_TO_NAME.put(Color.LTGRAY,      "Ltgray");
+COLOR_TO_NAME.put(Color.MAGENTA,     "Magenta");
+COLOR_TO_NAME.put(Color.RED,         "Red");
+COLOR_TO_NAME.put(Color.TRANSPARENT, "Transparent");
+COLOR_TO_NAME.put(Color.WHITE,       "White");
+COLOR_TO_NAME.put(Color.YELLOW,      "Yellow");
+
+String colorToName(int color) {
+  return COLOR_TO_NAME.get(color);
+}
+
+String colorToName(String color) {
+  int colour = Integer.parseInt(color);
+  return colorToName(colour);
+}
+
+/****************************** GIS POINT STYLES ******************************/
+Stack GC_VALUE_LAYER_IDS = new Stack();
+
+void initDefaultColours() {
+  insertIntoLocalSettings("{Yes}",                  "" + Color.GREEN,  false);
+  insertIntoLocalSettings("{Attempted_and_Failed}", "" + Color.YELLOW, false);
+  insertIntoLocalSettings("{No}",                   "" + Color.RED,    false);
+  insertIntoLocalSettings("{No_Observation}",       "" + Color.BLUE,   false);
+}
+
+void populateColourToAssign() {
+  String ref = "Control/Map/Colour_to_Assign";
+
+  List opts = new ArrayList();
+  for (entry : COLOR_TO_NAME.entrySet()) {
+    String name   = entry.getValue();
+    String colour = entry.getKey() + "";
+
+    opts.add(new NameValuePair(name, colour));
+  }
+
+  populateMenu(ref, opts);
+}
+
+void assignColor() {
+  String refGcVal  = "Control/Map/GC_Value";
+  String refColour = "Control/Map/Colour_to_Assign";
+
+  String gcVal  = getMenuValue (refGcVal);
+  String colour = getFieldValue(refColour);
+
+  if (isNull(gcVal)) {
+    String head = "'GC Value' must contain a value";
+    String body = "Please select a GC Value.";
+    showWarning(head, body);
+    return;
+  }
+
+  if (isNull(colour)) {
+    String head = "'Colour to Assign' must contain a value";
+    String body = "Please select a colour to assign to a GC Value.";
+    showWarning(head, body);
+    return;
+  }
+
+  insertIntoLocalSettings(gcVal, colour);
+
+  clearField(refGcVal);
+  clearField(refColour);
+  refreshMap();
+  redrawGcValueLayers();
+
+  String msg = "GC value '%s' reassigned to %s";
+  msg = replaceFirst(msg, gcVal);
+  msg = replaceFirst(msg, colorToName(colour));
+  showToast(msg);
+}
+
+initDefaultColours();
+addOnEvent("Control/Map/Assign_Colour", "click", "assignColor()");
 
 /* Displays the geometry of each entity whose menu, by the name of `attribName`,
  * has `vocabName` saved in it. The geometry is displayed in whatever colour is
@@ -77,7 +338,7 @@ void showDatabaseLayerByVocabName(
       Typeface.SANS_SERIF
   );
 
-  showDatabaseLayer(
+  int layerId = showDatabaseLayer(
       MAP_REF,
       layerName,
       isEntity,
@@ -88,6 +349,7 @@ void showDatabaseLayerByVocabName(
       spg,
       stx
   );
+  GC_VALUE_LAYER_IDS.push(layerId);
 }
 
 void showDatabaseLayerByVocabName(
@@ -98,22 +360,103 @@ void showDatabaseLayerByVocabName(
   showDatabaseLayerByVocabName("", vocabName, geoColor, layerName);
 }
 
+String getLayerName(String vocabName, int geoColor) {
+  String layerName = "";
+  layerName += guessArch16nValFromKey(vocabName);
+
+  String colorName = colorToName(geoColor);
+  if (colorName != null)
+    layerName += replaceFirst(" (%s)", colorName);
+
+  return layerName;
+}
+
 void showDatabaseLayerByVocabName(String vocabName, int geoColor) {
-  String layerName = guessArch16nValFromKey(vocabName);
+  String layerName = getLayerName(vocabName, geoColor);
   showDatabaseLayerByVocabName(vocabName, geoColor, layerName);
 }
+
+void showDatabaseLayerByVocabName(
+    String attribName,
+    String vocabName,
+    int    geoColor
+) {
+  String layerName = getLayerName(vocabName, geoColor);
+  showDatabaseLayerByVocabName(attribName, vocabName, geoColor, layerName);
+}
+
+void redrawGcValueLayers() {
+  // Remove the old layers
+  while (!GC_VALUE_LAYER_IDS.empty())
+    removeLayer(MAP_REF, GC_VALUE_LAYER_IDS.pop());
+
+  // Get the list of vocabNames in the GC dropdown. Store them in gcVocabNames
+  String refGcVal  = "Feature/GControl/GC";
+  List   gcVocabNames  = getMenuEntries(getAttributeName(refGcVal));
+  List   gcVocabNames_ = new ArrayList();
+  for (v : gcVocabNames)
+    gcVocabNames_.add(v.get(1));
+  gcVocabNames = gcVocabNames_;
+
+
+  // Convert gcVocabNames to gcVocabNamesString, which is what'll become part of
+  // a query
+  String gcVocabNamesString;
+  gcVocabNames = new ArrayList(gcVocabNames);
+  for (int i = 0; i < gcVocabNames.size(); i++) {
+    String s = dbReplaceFirst("%s", gcVocabNames.get(i));
+    gcVocabNames.set(i, s);
+  }
+  String gcVocabNamesString = gcVocabNames.toString()
+                                  .replace("[", "(")
+                                  .replace("]", ")");
+
+  String q = "SELECT key, value FROM localsettings WHERE key IN %s";
+  q = replaceFirst(q, gcVocabNamesString);
+
+  FetchCallback showDatabaseLayersByVocabName = new FetchCallback() {
+    onFetch(result) {
+      if (result == null) result = new ArrayList();
+
+      for (row : result) {
+        String gcVal  = row.get(0);
+        String colour = row.get(1); int colourInt = Integer.parseInt(colour);
+
+        showDatabaseLayerByVocabName("GC", gcVal, colourInt);
+      }
+    }
+  };
+
+  fetchAll(q, showDatabaseLayersByVocabName);
+}
+
+/********************************** MAP INIT **********************************/
 
 void initMap() {
   // showBaseMap(MAP_REF, "Base Map", "files/data/R1980_YambolElhovoExt.tif");
 
-  showDatabaseLayerByVocabName("{Yes}",  Color.BLUE);
-  showDatabaseLayerByVocabName("{No}",   Color.CYAN);
-  showDatabaseLayerByVocabName("{FAIL}", Color.GREEN);
+  setMapZoom(MAP_REF, 15.0f);
 
-  setMapZoom(MAP_REF, 13.0f);
+  // Shape
+  isEntity = true;
+  queryName = "Shape";
+  querySQL = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Shape'";
+  ps = createPointStyle(10, Color.YELLOW, 0.2f, 0.5f);
+  ls = createLineStyle(10, Color.YELLOW, 0.05f, 0.3f, null);
+  pos = createPolygonStyle(10, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
+  ts = createTextStyle(10, Color.YELLOW, 30, Typeface.SANS_SERIF);
+  showDatabaseLayer(MAP_REF, "Shape Layer", isEntity, queryName, querySQL, ps, ls, pos, ts);
+
+  // Data entry layer
+  DATA_ENTRY_LAYER    = "Data Entry Layer";
+  DATA_ENTRY_LAYER_ID = createCanvasLayer(MAP_REF, DATA_ENTRY_LAYER);
+  setSelectedLayer(MAP_REF, DATA_ENTRY_LAYER);
 }
 
 initMap();
+populateColourToAssign();
+
+<!--@SOURCE: logic/custom-search.bsh-->
 
 ]]></logic>
 

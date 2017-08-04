@@ -2,29 +2,14 @@
 <dataSchema>
   <ArchaeologicalElement name="Feature">
     <description></description>
-    <property name="Feature Type" type="vocab" isIdentifier="true">
-      <description>Comment on Feature type</description>
-      <formatString>$1</formatString>
-      <appendCharacterString> - </appendCharacterString>
-      <lookup>
-        <term>{Mound}
-<description></description></term>
-        <term>{Surface_feature}
-<description></description></term>
-        <term>{Artefact_concentration}
-<description></description></term>
-        <term>{Other}
-<description></description></term>
-      </lookup>
-    </property>
-    <property name="ID" type="measure">
+    <property name="ID" type="measure" isIdentifier="true">
       <description></description>
-      <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
+      <formatString>$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
-    <property name="Feature author" type="measure">
+    <property name="Feature author" type="measure" isIdentifier="true">
       <description></description>
-      <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
+      <formatString> $2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
     <property name="Feature timestamp" type="measure">
@@ -57,6 +42,21 @@
       <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
+    <property name="Feature Type" type="vocab">
+      <description>Comment on Feature type</description>
+      <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
+      <appendCharacterString> - </appendCharacterString>
+      <lookup>
+        <term>{Mound}
+<description></description></term>
+        <term>{Surface_feature}
+<description></description></term>
+        <term>{Artefact_concentration}
+<description></description></term>
+        <term>{Other}
+<description></description></term>
+      </lookup>
+    </property>
     <property name="Source" type="vocab">
       <description></description>
       <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
@@ -73,11 +73,6 @@
       </lookup>
     </property>
     <property name="Note" type="measure">
-      <description></description>
-      <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
-      <appendCharacterString> - </appendCharacterString>
-    </property>
-    <property name="Go To Map" type="measure">
       <description></description>
       <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
       <appendCharacterString> - </appendCharacterString>
@@ -131,7 +126,7 @@
       <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
-    <property name="Picture" type="measure">
+    <property name="Picture" type="file" file="true" thumbnail="true">
       <description></description>
       <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
       <appendCharacterString> - </appendCharacterString>
@@ -139,9 +134,24 @@
   </ArchaeologicalElement>
   <ArchaeologicalElement name="Shape">
     <description></description>
-    <property name="Label" type="measure" isIdentifier="true">
+    <property name="Point ID" type="measure" isIdentifier="true">
       <description></description>
       <formatString>$2</formatString>
+      <appendCharacterString> - </appendCharacterString>
+    </property>
+    <property name="Line ID" type="measure" isIdentifier="true">
+      <description></description>
+      <formatString>$2</formatString>
+      <appendCharacterString> - </appendCharacterString>
+    </property>
+    <property name="Polygon ID" type="measure" isIdentifier="true">
+      <description></description>
+      <formatString>$2</formatString>
+      <appendCharacterString> - </appendCharacterString>
+    </property>
+    <property name="Label" type="measure" isIdentifier="true">
+      <description></description>
+      <formatString> $2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
     <property name="Note" type="measure">
