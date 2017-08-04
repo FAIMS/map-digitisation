@@ -12,14 +12,12 @@
 <Control f="nodata">
   <IDs>
     <Create_Feature l="Feature"/>
-    <Next_Point_ID b="decimal"/>
-    <Next_Line_ID b="decimal"/>
-    <Next_Polygon_ID b="decimal"/>
+    <autonum/>
   </IDs>
   <Map f="noscroll">
     <!--SRID: 32635-->
     <Map t="map" f="nolabel"/>
-    <!--<Create_Shape l="Shape"/>      Added via @POSTPROC, but in columns-->
+    <!--<Create_Shape l="..."/>      Added via @POSTPROC, but in columns-->
     <cols>
       <GC_Value t="dropdown" vp="Feature/GControl/GC"/>
       <Colour_to_Assign t="dropdown">
@@ -32,7 +30,9 @@
     <!--"Select User" dropdown has been added usin @POSTPROC-->
   </search>
   <Vars f="hidden nowire">
-    <Create_Shape l="Shape"/>
+    <Create_Point   l="Point"/>
+    <Create_Line    l="Line"/>
+    <Create_Polygon l="Polygon"/>
   </Vars>
 </Control>
 
@@ -93,22 +93,46 @@
   </GControl>
 </Feature>
 
-<Shape>
-  <fmt>{{Point_ID}}{{Line_ID}}{{Polygon_ID}} {{Label}}</fmt>
+<Point>
+  <fmt>{{Label}}</fmt>
   <Shape_Note>
-    <Point_ID f="readonly"/>
-    <Line_ID f="readonly"/>
-    <Polygon_ID f="readonly"/>
+    <Point_ID f="autonum readonly"/>
     <Label/>
     <Note/>
   </Shape_Note>
-</Shape>
+</Point>
+
+<Line>
+  <fmt>{{Label}}</fmt>
+  <Shape_Note>
+    <Line_ID f="autonum readonly"/>
+    <Label/>
+    <Note/>
+  </Shape_Note>
+</Line>
+
+<Polygon>
+  <fmt>{{Label}}</fmt>
+  <Shape_Note>
+    <Polygon_ID f="autonum readonly"/>
+    <Label/>
+    <Note/>
+  </Shape_Note>
+</Polygon>
 
 <logic><![CDATA[
 /************************************ MAP *************************************/
 final String MAP_REF = "Control/Map/Map";
 String DATA_ENTRY_LAYER;
 int    DATA_ENTRY_LAYER_ID;
+
+boolean geoListHasInstanceOf(Class clazz) {
+  List geometry = getGeometryList(MAP_REF, DATA_ENTRY_LAYER_ID);
+  for (Geometry g : geometry)
+    if (clazz.isInstance(g))
+      return true;
+  return false;
+}
 
 void clearGeometry() {
   List    geometry = getGeometryList(MAP_REF, DATA_ENTRY_LAYER_ID);
@@ -124,15 +148,22 @@ void clearGeometry() {
 
 boolean checkForGeometry() {
   List geometry = getGeometryList(MAP_REF, DATA_ENTRY_LAYER_ID);
-  if (geometry == null || geometry.size() == 0) {
+
+  if (geometry == null || geometry.size() != 1) {
     String head = "Cannot Create Shape";
-    String body = "At least one shape must be present on the data entry layer.";
+    String body = "Exactly one shape must be present on the data entry layer.";
     showWarning(head, body);
 
     return false;
   } else {
     return true;
   }
+}
+
+void onClickControlCreateShape() {
+  if (geoListHasInstanceOf(Point  .class)) onClickControlCreatePoint();
+  if (geoListHasInstanceOf(Line   .class)) onClickControlCreateLine();
+  if (geoListHasInstanceOf(Polygon.class)) onClickControlCreatePolygon();
 }
 
 void centreMe() {
@@ -178,39 +209,12 @@ addOnEvent(
     Integer.MAX_VALUE
 );
 
-addOnEvent("Shape", "save", "clearGeometry()");
+addOnEvent("Point",   "save", "clearGeometry()");
+addOnEvent("Line",    "save", "clearGeometry()");
+addOnEvent("Polygon", "save", "clearGeometry()");
 
 addOnEvent("Control/Map", "show",  "refreshMap()");
 addOnEvent("Control/Map", "show",  "redrawGcValueLayers()");
-
-/**************************** SHAPE AUTONUMBERING *****************************/
-
-AUTONUM_DEST_TO_SOURCE.put("Shape/Shape_Note/Point_ID",   "Control/IDs/Next_Point_ID");
-AUTONUM_DEST_TO_SOURCE.put("Shape/Shape_Note/Line_ID",    "Control/IDs/Next_Line_ID");
-AUTONUM_DEST_TO_SOURCE.put("Shape/Shape_Note/Polygon_ID", "Control/IDs/Next_Polygon_ID");
-
-for (String ref : AUTONUM_DEST_TO_SOURCE.values())
-  persistOverSessions(ref, "1");
-
-boolean geoListHasInstanceOf(Class clazz) {
-  List geometry = getGeometryList(MAP_REF, DATA_ENTRY_LAYER_ID);
-  for (Geometry g : geometry)
-    if (clazz.isInstance(g))
-      return true;
-  return false;
-}
-
-void incShapeAutoNum() {
-  String refPoint = "Shape/Shape_Note/Point_ID";
-  String refLine  = "Shape/Shape_Note/Line_ID";
-  String refPoly  = "Shape/Shape_Note/Polygon_ID";
-
-  if (geoListHasInstanceOf(Point  .class)) incAutoNum(refPoint);
-  if (geoListHasInstanceOf(Line   .class)) incAutoNum(refLine);
-  if (geoListHasInstanceOf(Polygon.class)) incAutoNum(refPoly);
-}
-
-addOnEvent("Shape", "create", "incShapeAutoNum()");
 
 /*********************************** COLORS ***********************************/
 

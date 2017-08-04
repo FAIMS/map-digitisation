@@ -77,7 +77,9 @@
               <Entity_List/>
             </Search>
             <Vars>
-              <Create_Shape/>
+              <Create_Point/>
+              <Create_Line/>
+              <Create_Polygon/>
             </Vars>
           </Control>
           <Feature>
@@ -120,15 +122,27 @@
               <Picture_Button_1/>
             </GControl>
           </Feature>
-          <Shape>
+          <Point>
             <Shape_Note>
               <Point_ID/>
+              <Label/>
+              <Note/>
+            </Shape_Note>
+          </Point>
+          <Line>
+            <Shape_Note>
               <Line_ID/>
+              <Label/>
+              <Note/>
+            </Shape_Note>
+          </Line>
+          <Polygon>
+            <Shape_Note>
               <Polygon_ID/>
               <Label/>
               <Note/>
             </Shape_Note>
-          </Shape>
+          </Polygon>
         </faims>
       </instance>
       <bind nodeset="/faims/Control/IDs/Next_Point_ID" type="decimal"/>
@@ -187,13 +201,13 @@
         <trigger ref="Create_Feature">
           <label>{Create_Feature}</label>
         </trigger>
-        <input ref="Next_Point_ID">
+        <input ref="Next_Point_ID" faims_style_class="required">
           <label>{Next_Point_ID}</label>
         </input>
-        <input ref="Next_Line_ID">
+        <input ref="Next_Line_ID" faims_style_class="required">
           <label>{Next_Line_ID}</label>
         </input>
-        <input ref="Next_Polygon_ID">
+        <input ref="Next_Polygon_ID" faims_style_class="required">
           <label>{Next_Polygon_ID}</label>
         </input>
       </group>
@@ -297,8 +311,14 @@
       </group>
       <group ref="Vars" faims_hidden="true">
         <label>{Vars}</label>
-        <trigger ref="Create_Shape">
-          <label>{Create_Shape}</label>
+        <trigger ref="Create_Point">
+          <label>{Create_Point}</label>
+        </trigger>
+        <trigger ref="Create_Line">
+          <label>{Create_Line}</label>
+        </trigger>
+        <trigger ref="Create_Polygon">
+          <label>{Create_Polygon}</label>
         </trigger>
       </group>
     </group>
@@ -412,16 +432,40 @@
         </trigger>
       </group>
     </group>
-    <group ref="Shape" faims_archent_type="Shape">
-      <label>{Shape}</label>
+    <group ref="Point" faims_archent_type="Point">
+      <label>{Point}</label>
       <group ref="Shape_Note">
         <label>{Shape_Note}</label>
         <input faims_attribute_name="Point ID" faims_attribute_type="measure" ref="Point_ID" faims_read_only="true">
           <label>{Point_ID}</label>
         </input>
+        <input faims_attribute_name="Label" faims_attribute_type="measure" ref="Label">
+          <label>{Label}</label>
+        </input>
+        <input faims_attribute_name="Note" faims_attribute_type="measure" ref="Note">
+          <label>{Note}</label>
+        </input>
+      </group>
+    </group>
+    <group ref="Line" faims_archent_type="Line">
+      <label>{Line}</label>
+      <group ref="Shape_Note">
+        <label>{Shape_Note}</label>
         <input faims_attribute_name="Line ID" faims_attribute_type="measure" ref="Line_ID" faims_read_only="true">
           <label>{Line_ID}</label>
         </input>
+        <input faims_attribute_name="Label" faims_attribute_type="measure" ref="Label">
+          <label>{Label}</label>
+        </input>
+        <input faims_attribute_name="Note" faims_attribute_type="measure" ref="Note">
+          <label>{Note}</label>
+        </input>
+      </group>
+    </group>
+    <group ref="Polygon" faims_archent_type="Polygon">
+      <label>{Polygon}</label>
+      <group ref="Shape_Note">
+        <label>{Shape_Note}</label>
         <input faims_attribute_name="Polygon ID" faims_attribute_type="measure" ref="Polygon_ID" faims_read_only="true">
           <label>{Polygon_ID}</label>
         </input>

@@ -26,10 +26,28 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: tab group
-        Ref:  Shape
+        Ref:  Line
      */
-    public static View get_Shape(Solo solo) {
-        String ref = "Shape";
+    public static View get_Line(Solo solo) {
+        String ref = "Line";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: tab group
+        Ref:  Point
+     */
+    public static View get_Point(Solo solo) {
+        String ref = "Point";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: tab group
+        Ref:  Polygon
+     */
+    public static View get_Polygon(Solo solo) {
+        String ref = "Polygon";
         return (android.view.View) solo.getView((Object) ref);
     }
 
@@ -88,10 +106,28 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: tab
-        Ref:  Shape/Shape_Note
+        Ref:  Line/Shape_Note
      */
-    public static View get_Shape_ShapeNote(Solo solo) {
-        String ref = "Shape/Shape_Note";
+    public static View get_Line_ShapeNote(Solo solo) {
+        String ref = "Line/Shape_Note";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: tab
+        Ref:  Point/Shape_Note
+     */
+    public static View get_Point_ShapeNote(Solo solo) {
+        String ref = "Point/Shape_Note";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: tab
+        Ref:  Polygon/Shape_Note
+     */
+    public static View get_Polygon_ShapeNote(Solo solo) {
+        String ref = "Polygon/Shape_Note";
         return (android.view.View) solo.getView((Object) ref);
     }
 
@@ -150,10 +186,28 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: button
-        Ref:  Control/Vars/Create_Shape
+        Ref:  Control/Vars/Create_Line
      */
-    public static View get_Control_Vars_CreateShape(Solo solo) {
-        String ref = "Control/Vars/Create_Shape";
+    public static View get_Control_Vars_CreateLine(Solo solo) {
+        String ref = "Control/Vars/Create_Line";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
+        Ref:  Control/Vars/Create_Point
+     */
+    public static View get_Control_Vars_CreatePoint(Solo solo) {
+        String ref = "Control/Vars/Create_Point";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
+        Ref:  Control/Vars/Create_Polygon
+     */
+    public static View get_Control_Vars_CreatePolygon(Solo solo) {
+        String ref = "Control/Vars/Create_Polygon";
         return (android.view.View) solo.getView((Object) ref);
     }
 
@@ -384,46 +438,82 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: input
-        Ref:  Shape/Shape_Note/Label
+        Ref:  Line/Shape_Note/Label
      */
-    public static EditText get_Shape_ShapeNote_Label(Solo solo) {
-        String ref = "Shape/Shape_Note/Label";
+    public static EditText get_Line_ShapeNote_Label(Solo solo) {
+        String ref = "Line/Shape_Note/Label";
         return (android.widget.EditText) solo.getView((Object) ref);
     }
 
     /*
         Type: input
-        Ref:  Shape/Shape_Note/Line_ID
+        Ref:  Line/Shape_Note/Line_ID
      */
-    public static View get_Shape_ShapeNote_LineID(Solo solo) {
-        String ref = "Shape/Shape_Note/Line_ID";
+    public static View get_Line_ShapeNote_LineID(Solo solo) {
+        String ref = "Line/Shape_Note/Line_ID";
         return (android.view.View) solo.getView((Object) ref);
     }
 
     /*
         Type: input
-        Ref:  Shape/Shape_Note/Note
+        Ref:  Line/Shape_Note/Note
      */
-    public static EditText get_Shape_ShapeNote_Note(Solo solo) {
-        String ref = "Shape/Shape_Note/Note";
+    public static EditText get_Line_ShapeNote_Note(Solo solo) {
+        String ref = "Line/Shape_Note/Note";
         return (android.widget.EditText) solo.getView((Object) ref);
     }
 
     /*
         Type: input
-        Ref:  Shape/Shape_Note/Point_ID
+        Ref:  Point/Shape_Note/Label
      */
-    public static View get_Shape_ShapeNote_PointID(Solo solo) {
-        String ref = "Shape/Shape_Note/Point_ID";
+    public static EditText get_Point_ShapeNote_Label(Solo solo) {
+        String ref = "Point/Shape_Note/Label";
+        return (android.widget.EditText) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Point/Shape_Note/Note
+     */
+    public static EditText get_Point_ShapeNote_Note(Solo solo) {
+        String ref = "Point/Shape_Note/Note";
+        return (android.widget.EditText) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Point/Shape_Note/Point_ID
+     */
+    public static View get_Point_ShapeNote_PointID(Solo solo) {
+        String ref = "Point/Shape_Note/Point_ID";
         return (android.view.View) solo.getView((Object) ref);
     }
 
     /*
         Type: input
-        Ref:  Shape/Shape_Note/Polygon_ID
+        Ref:  Polygon/Shape_Note/Label
      */
-    public static View get_Shape_ShapeNote_PolygonID(Solo solo) {
-        String ref = "Shape/Shape_Note/Polygon_ID";
+    public static EditText get_Polygon_ShapeNote_Label(Solo solo) {
+        String ref = "Polygon/Shape_Note/Label";
+        return (android.widget.EditText) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Polygon/Shape_Note/Note
+     */
+    public static EditText get_Polygon_ShapeNote_Note(Solo solo) {
+        String ref = "Polygon/Shape_Note/Note";
+        return (android.widget.EditText) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Polygon/Shape_Note/Polygon_ID
+     */
+    public static View get_Polygon_ShapeNote_PolygonID(Solo solo) {
+        String ref = "Polygon/Shape_Note/Polygon_ID";
         return (android.view.View) solo.getView((Object) ref);
     }
 
