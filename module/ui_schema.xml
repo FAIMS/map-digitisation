@@ -27,12 +27,6 @@
             </Manual>
           </User_List>
           <Control>
-            <IDs>
-              <Create_Feature/>
-              <Next_Point_ID/>
-              <Next_Line_ID/>
-              <Next_Polygon_ID/>
-            </IDs>
             <Map>
               <Map/>
               <Colgroup_A>
@@ -40,10 +34,13 @@
                   <Center_Me_1/>
                 </Col_0>
                 <Col_1>
-                  <Create_Shape/>
+                  <Create_Record/>
                 </Col_1>
               </Colgroup_A>
               <Select_User/>
+            </Map>
+            <IDs>
+              <Create_Feature/>
               <Colgroup_1>
                 <Col_1>
                   <GC_Value/>
@@ -55,7 +52,10 @@
                   <Assign_Colour/>
                 </Col_3>
               </Colgroup_1>
-            </Map>
+              <Next_Point_ID/>
+              <Next_Line_ID/>
+              <Next_Polygon_ID/>
+            </IDs>
             <Search>
               <Colgroup_0>
                 <Col_0>
@@ -77,9 +77,7 @@
               <Entity_List/>
             </Search>
             <Vars>
-              <Create_Point/>
-              <Create_Line/>
-              <Create_Polygon/>
+              <Create_Shape/>
             </Vars>
           </Control>
           <Feature>
@@ -122,27 +120,23 @@
               <Picture_Button_1/>
             </GControl>
           </Feature>
-          <Point>
+          <Shape>
             <Shape_Note>
-              <Point_ID/>
+              <Colgroup_1>
+                <Col_1>
+                  <Line_ID/>
+                </Col_1>
+                <Col_2>
+                  <Polygon_ID/>
+                </Col_2>
+              </Colgroup_1>
               <Label/>
               <Note/>
             </Shape_Note>
-          </Point>
-          <Line>
-            <Shape_Note>
-              <Line_ID/>
-              <Label/>
-              <Note/>
-            </Shape_Note>
-          </Line>
-          <Polygon>
-            <Shape_Note>
-              <Polygon_ID/>
-              <Label/>
-              <Note/>
-            </Shape_Note>
-          </Polygon>
+            <Vars>
+              <Shape_author/>
+            </Vars>
+          </Shape>
         </faims>
       </instance>
       <bind nodeset="/faims/Control/IDs/Next_Point_ID" type="decimal"/>
@@ -196,21 +190,6 @@
     </group>
     <group ref="Control">
       <label>{Control}</label>
-      <group ref="IDs">
-        <label>{IDs}</label>
-        <trigger ref="Create_Feature">
-          <label>{Create_Feature}</label>
-        </trigger>
-        <input ref="Next_Point_ID" faims_style_class="required">
-          <label>{Next_Point_ID}</label>
-        </input>
-        <input ref="Next_Line_ID" faims_style_class="required">
-          <label>{Next_Line_ID}</label>
-        </input>
-        <input ref="Next_Polygon_ID" faims_style_class="required">
-          <label>{Next_Polygon_ID}</label>
-        </input>
-      </group>
       <group ref="Map" faims_scrollable="false">
         <label>{Map}</label>
         <input faims_map="true" ref="Map">
@@ -226,11 +205,17 @@
           </group>
           <group ref="Col_1" faims_style="even">
             <label/>
-            <trigger ref="Create_Shape">
-              <label>{Create_Shape}</label>
+            <trigger ref="Create_Record">
+              <label>{Create_Record}</label>
             </trigger>
           </group>
         </group>
+      </group>
+      <group ref="IDs">
+        <label>{IDs}</label>
+        <trigger ref="Create_Feature">
+          <label>{Create_Feature}</label>
+        </trigger>
         <group ref="Colgroup_1" faims_style="orientation">
           <label/>
           <group ref="Col_1" faims_style="even">
@@ -260,6 +245,15 @@
             </trigger>
           </group>
         </group>
+        <input ref="Next_Point_ID">
+          <label>{Next_Point_ID}</label>
+        </input>
+        <input ref="Next_Line_ID">
+          <label>{Next_Line_ID}</label>
+        </input>
+        <input ref="Next_Polygon_ID">
+          <label>{Next_Polygon_ID}</label>
+        </input>
       </group>
       <group ref="Search" faims_scrollable="false">
         <label>{Search}</label>
@@ -311,14 +305,8 @@
       </group>
       <group ref="Vars" faims_hidden="true">
         <label>{Vars}</label>
-        <trigger ref="Create_Point">
-          <label>{Create_Point}</label>
-        </trigger>
-        <trigger ref="Create_Line">
-          <label>{Create_Line}</label>
-        </trigger>
-        <trigger ref="Create_Polygon">
-          <label>{Create_Polygon}</label>
+        <trigger ref="Create_Shape">
+          <label>{Create_Shape}</label>
         </trigger>
       </group>
     </group>
@@ -432,13 +420,25 @@
         </trigger>
       </group>
     </group>
-    <group ref="Point" faims_archent_type="Point">
-      <label>{Point}</label>
+    <group ref="Shape" faims_archent_type="Shape">
+      <label>{Shape}</label>
       <group ref="Shape_Note">
         <label>{Shape_Note}</label>
-        <input faims_attribute_name="Point ID" faims_attribute_type="measure" ref="Point_ID" faims_read_only="true">
-          <label>{Point_ID}</label>
-        </input>
+        <group ref="Colgroup_1" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Line ID" faims_attribute_type="measure" ref="Line_ID" faims_read_only="true">
+              <label>{Line_ID}</label>
+            </input>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Polygon ID" faims_attribute_type="measure" ref="Polygon_ID" faims_read_only="true">
+              <label>{Polygon_ID}</label>
+            </input>
+          </group>
+        </group>
         <input faims_attribute_name="Label" faims_attribute_type="measure" ref="Label">
           <label>{Label}</label>
         </input>
@@ -446,34 +446,10 @@
           <label>{Note}</label>
         </input>
       </group>
-    </group>
-    <group ref="Line" faims_archent_type="Line">
-      <label>{Line}</label>
-      <group ref="Shape_Note">
-        <label>{Shape_Note}</label>
-        <input faims_attribute_name="Line ID" faims_attribute_type="measure" ref="Line_ID" faims_read_only="true">
-          <label>{Line_ID}</label>
-        </input>
-        <input faims_attribute_name="Label" faims_attribute_type="measure" ref="Label">
-          <label>{Label}</label>
-        </input>
-        <input faims_attribute_name="Note" faims_attribute_type="measure" ref="Note">
-          <label>{Note}</label>
-        </input>
-      </group>
-    </group>
-    <group ref="Polygon" faims_archent_type="Polygon">
-      <label>{Polygon}</label>
-      <group ref="Shape_Note">
-        <label>{Shape_Note}</label>
-        <input faims_attribute_name="Polygon ID" faims_attribute_type="measure" ref="Polygon_ID" faims_read_only="true">
-          <label>{Polygon_ID}</label>
-        </input>
-        <input faims_attribute_name="Label" faims_attribute_type="measure" ref="Label">
-          <label>{Label}</label>
-        </input>
-        <input faims_attribute_name="Note" faims_attribute_type="measure" ref="Note">
-          <label>{Note}</label>
+      <group ref="Vars" faims_hidden="true">
+        <label>{Vars}</label>
+        <input faims_attribute_name="Shape author" faims_attribute_type="measure" ref="Shape_author" faims_read_only="true">
+          <label>{Author}</label>
         </input>
       </group>
     </group>

@@ -7,6 +7,13 @@ addOnEvent("Control/Search", "show", "populateSelectUser()");
 
 addOnEvent("Control/Search/Select_User", "click", "search()");
 
+entityTypes = new ArrayList();
+entityTypes.add(new NameValuePair("{All}", ""));
+entityTypes.add(new NameValuePair("{Feature}", "Feature"));
+entityTypes.add(new NameValuePair("{Shape} (Line)", "Shape LINESTRING"));
+entityTypes.add(new NameValuePair("{Shape} (Polygon)", "Shape POLYGON"));
+populateDropDown("Control/Search/Entity_Types", entityTypes);
+
 void populateSelectUser(){
   String refSearchUsers = "Control/Search/Select_User";
   String getNonDeletedUsersQuery = "SELECT userid, fname || ' ' || lname "+
@@ -32,29 +39,60 @@ void search(){
   String refEntityTypes = tabgroup + "/Search/Entity_Types";
   String refSelectUser  = tabgroup + "/Search/Select_User";
 
-  String type = getFieldValue(refEntityTypes);
-  String term = getFieldValue(refSearchTerm);
-  String user = getFieldValue(refSelectUser);
+  String type = getSearchArchEntType(refEntityTypes);
+  String term = getFieldValue       (refSearchTerm);
+  String user = getFieldValue       (refSelectUser);
+  String geo  = getSearchGeoType    (refEntityTypes);
   if (isNull(user)) return;
-  String searchQuery = "SELECT uuid, response " +
-                       "  FROM latestNonDeletedArchEntFormattedIdentifiers  " +
+  String searchQuery = "SELECT uuid, response, aenttypename " +
+                       "  FROM latestNonDeletedArchEntFormattedIdentifiers " +
+                       "  JOIN latestnondeletedarchent USING (uuid) " +
                        " WHERE uuid in (SELECT uuid " +
                        "                  FROM latestNonDeletedArchEntIdentifiers " +
                        "                 WHERE measure LIKE '{term}%'  " +
-                       "                   AND ( aenttypename LIKE '{type}' OR '' = '{type}' ) " +
+                       "                   AND ( aenttypename = '{type}' OR '' = '{type}' ) " +
                        "                   AND ( userid = {user} OR -1 = {user}) " +
                        "                ) " +
+                       " AND geometrytype(geometryn(geospatialcolumn, 1)) = '{geo}' OR '{geo}' = ''" +
                        " ORDER BY response " +
                        " LIMIT ? " +
-                       "OFFSET ? ";
+                       "OFFSET ?";
   searchQuery = replaceFirst(searchQuery, "{term}", term);
   searchQuery = replaceFirst(searchQuery, "{type}", type);
   searchQuery = replaceFirst(searchQuery, "{type}", type);
   searchQuery = replaceFirst(searchQuery, "{user}", user);
   searchQuery = replaceFirst(searchQuery, "{user}", user);
+  searchQuery = replaceFirst(searchQuery, "{geo}",  geo);
+  searchQuery = replaceFirst(searchQuery, "{geo}",  geo);
 
   populateCursorList(refEntityList, searchQuery, 25);
   refreshTabgroupCSS(tabgroup);
 
   Log.d("Module", "Search query: " + searchQuery);
+}
+
+String getSearchArchEntType(String ref) {
+  String val = getFieldValue(ref);
+  if (isNull(val))
+    val = "";
+
+  String[] vals = val.split(" ");
+
+  if (vals.length >= 1)
+    return vals[0];
+
+  return "";
+}
+
+String getSearchGeoType(String ref) {
+  String val = getFieldValue(ref);
+  if (isNull(val))
+    val = "";
+
+  String[] vals = val.split(" ");
+
+  if (vals.length >= 2)
+    return vals[1];
+
+  return "";
 }

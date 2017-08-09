@@ -1,5 +1,5 @@
 /*
- * GENERATED WITH FAIMS-TOOLS, SHA1: 14964cf47881f279794746a4c269a5b06c37f776
+ * GENERATED WITH FAIMS-TOOLS, SHA1: e2f2cddbbadc83876da257a4911fa4367493f5e7
  */
 import android.util.Log;
 import android.os.Build.MODEL;
@@ -164,22 +164,20 @@ HashMap ATTRIB_NAMES_NON_STANDARD      = new HashMap();
 
 REF_TO_TYPE.put("User_List/User_List/User_List", "list");
 REF_TO_TYPE.put("User_List/Manual/Manual", "webview");
+REF_TO_TYPE.put("Control/Map/Map", "map");
+REF_TO_TYPE.put("Control/Map/Center_Me_1", "button");
 REF_TO_TYPE.put("Control/IDs/Create_Feature", "button");
+REF_TO_TYPE.put("Control/IDs/GC_Value", "dropdown");
+REF_TO_TYPE.put("Control/IDs/Colour_to_Assign", "dropdown");
+REF_TO_TYPE.put("Control/IDs/Assign_Colour", "button");
 REF_TO_TYPE.put("Control/IDs/Next_Point_ID", "input");
 REF_TO_TYPE.put("Control/IDs/Next_Line_ID", "input");
 REF_TO_TYPE.put("Control/IDs/Next_Polygon_ID", "input");
-REF_TO_TYPE.put("Control/Map/Map", "map");
-REF_TO_TYPE.put("Control/Map/Center_Me_1", "button");
-REF_TO_TYPE.put("Control/Map/GC_Value", "dropdown");
-REF_TO_TYPE.put("Control/Map/Colour_to_Assign", "dropdown");
-REF_TO_TYPE.put("Control/Map/Assign_Colour", "button");
 REF_TO_TYPE.put("Control/Search/Search_Term", "input");
 REF_TO_TYPE.put("Control/Search/Search_Button", "button");
 REF_TO_TYPE.put("Control/Search/Entity_Types", "dropdown");
 REF_TO_TYPE.put("Control/Search/Entity_List", "list");
-REF_TO_TYPE.put("Control/Vars/Create_Point", "button");
-REF_TO_TYPE.put("Control/Vars/Create_Line", "button");
-REF_TO_TYPE.put("Control/Vars/Create_Polygon", "button");
+REF_TO_TYPE.put("Control/Vars/Create_Shape", "button");
 REF_TO_TYPE.put("Feature/Main/ID", "input");
 REF_TO_TYPE.put("Feature/Main/Feature_author", "input");
 REF_TO_TYPE.put("Feature/Main/Feature_timestamp", "input");
@@ -200,26 +198,21 @@ REF_TO_TYPE.put("Feature/GControl/Classification", "dropdown");
 REF_TO_TYPE.put("Feature/GControl/Other_Description", "input");
 REF_TO_TYPE.put("Feature/GControl/Picture", "camera");
 REF_TO_TYPE.put("Feature/GControl/Picture_Button_1", "button");
-REF_TO_TYPE.put("Point/Shape_Note/Point_ID", "input");
-REF_TO_TYPE.put("Point/Shape_Note/Label", "input");
-REF_TO_TYPE.put("Point/Shape_Note/Note", "input");
-REF_TO_TYPE.put("Line/Shape_Note/Line_ID", "input");
-REF_TO_TYPE.put("Line/Shape_Note/Label", "input");
-REF_TO_TYPE.put("Line/Shape_Note/Note", "input");
-REF_TO_TYPE.put("Polygon/Shape_Note/Polygon_ID", "input");
-REF_TO_TYPE.put("Polygon/Shape_Note/Label", "input");
-REF_TO_TYPE.put("Polygon/Shape_Note/Note", "input");
+REF_TO_TYPE.put("Shape/Shape_Note/Line_ID", "input");
+REF_TO_TYPE.put("Shape/Shape_Note/Polygon_ID", "input");
+REF_TO_TYPE.put("Shape/Shape_Note/Label", "input");
+REF_TO_TYPE.put("Shape/Shape_Note/Note", "input");
+REF_TO_TYPE.put("Shape/Vars/Shape_author", "input");
 REF_TO_TYPE.put("User_List/User_List", "tab");
 REF_TO_TYPE.put("User_List/Manual", "tab");
-REF_TO_TYPE.put("Control/IDs", "tab");
 REF_TO_TYPE.put("Control/Map", "tab");
+REF_TO_TYPE.put("Control/IDs", "tab");
 REF_TO_TYPE.put("Control/Search", "tab");
 REF_TO_TYPE.put("Control/Vars", "tab");
 REF_TO_TYPE.put("Feature/Main", "tab");
 REF_TO_TYPE.put("Feature/GControl", "tab");
-REF_TO_TYPE.put("Point/Shape_Note", "tab");
-REF_TO_TYPE.put("Line/Shape_Note", "tab");
-REF_TO_TYPE.put("Polygon/Shape_Note", "tab");
+REF_TO_TYPE.put("Shape/Shape_Note", "tab");
+REF_TO_TYPE.put("Shape/Vars", "tab");
 
 DATA_REFS.add("Feature/Main/ID");
 DATA_REFS.add("Feature/Main/Feature_author");
@@ -238,40 +231,33 @@ DATA_REFS.add("Feature/GControl/Description");
 DATA_REFS.add("Feature/GControl/Classification");
 DATA_REFS.add("Feature/GControl/Other_Description");
 DATA_REFS.add("Feature/GControl/Picture");
-DATA_REFS.add("Point/Shape_Note/Point_ID");
-DATA_REFS.add("Point/Shape_Note/Label");
-DATA_REFS.add("Point/Shape_Note/Note");
-DATA_REFS.add("Line/Shape_Note/Line_ID");
-DATA_REFS.add("Line/Shape_Note/Label");
-DATA_REFS.add("Line/Shape_Note/Note");
-DATA_REFS.add("Polygon/Shape_Note/Polygon_ID");
-DATA_REFS.add("Polygon/Shape_Note/Label");
-DATA_REFS.add("Polygon/Shape_Note/Note");
+DATA_REFS.add("Shape/Shape_Note/Line_ID");
+DATA_REFS.add("Shape/Shape_Note/Polygon_ID");
+DATA_REFS.add("Shape/Shape_Note/Label");
+DATA_REFS.add("Shape/Shape_Note/Note");
+DATA_REFS.add("Shape/Vars/Shape_author");
 
 
 
-VP_REF_TO_REF.put("Control/Map/GC_Value", "Feature/GControl/GC");
+VP_REF_TO_REF.put("Control/IDs/GC_Value", "Feature/GControl/GC");
 
 
 
 TAB_GROUPS_AS_LIST.add("User_List");
 TAB_GROUPS_AS_LIST.add("Control");
 TAB_GROUPS_AS_LIST.add("Feature");
-TAB_GROUPS_AS_LIST.add("Point");
-TAB_GROUPS_AS_LIST.add("Line");
-TAB_GROUPS_AS_LIST.add("Polygon");
+TAB_GROUPS_AS_LIST.add("Shape");
 
 TABS_AS_LIST.add("User_List/User_List");
 TABS_AS_LIST.add("User_List/Manual");
-TABS_AS_LIST.add("Control/IDs");
 TABS_AS_LIST.add("Control/Map");
+TABS_AS_LIST.add("Control/IDs");
 TABS_AS_LIST.add("Control/Search");
 TABS_AS_LIST.add("Control/Vars");
 TABS_AS_LIST.add("Feature/Main");
 TABS_AS_LIST.add("Feature/GControl");
-TABS_AS_LIST.add("Point/Shape_Note");
-TABS_AS_LIST.add("Line/Shape_Note");
-TABS_AS_LIST.add("Polygon/Shape_Note");
+TABS_AS_LIST.add("Shape/Shape_Note");
+TABS_AS_LIST.add("Shape/Vars");
 
 
 
@@ -362,9 +348,7 @@ HashSet getTabsAsHashSet() {
 
 List getStartingIdRefs() {
   List l = new ArrayList();
-  l.add("Control/IDs/Next_Point_ID");
-  l.add("Control/IDs/Next_Line_ID");
-  l.add("Control/IDs/Next_Polygon_ID");
+  
   return l;
 }
 
@@ -1148,21 +1132,15 @@ void timedPopulateCursorList(String ref, String q, int limit) {
 
 void setUpTypeHierarchy() {
   //- 
-  //  - Polygon
-  //  - Line
+  //  - Shape
   //  - Feature
-  //  - Point
 
   n0 = Tree("", 1);
-  n1 = Tree("Polygon", 1);
-  n2 = Tree("Line", 1);
-  n3 = Tree("Feature", 1);
-  n4 = Tree("Point", 1);
+  n1 = Tree("Shape", 1);
+  n2 = Tree("Feature", 1);
 
   n0.addChild(n1);
   n0.addChild(n2);
-  n0.addChild(n3);
-  n0.addChild(n4);
 
 
   PERF_TYPE_TREE = n0;
@@ -2636,15 +2614,6 @@ String validateFields(List fields, String format) {
   return out;
 }
 
-void validateControl() {
-  List f = new ArrayList(); // Fields to be validated
-  f.add(fieldPair("Control/IDs/Next_Point_ID", "{Next_Point_ID}"));
-  f.add(fieldPair("Control/IDs/Next_Line_ID", "{Next_Line_ID}"));
-  f.add(fieldPair("Control/IDs/Next_Polygon_ID", "{Next_Polygon_ID}"));
-
-  String validationMessage = validateFields(f, "PLAINTEXT");
-  showWarning("{validation_results}", validationMessage);
-}
 
 
 /******************************************************************************/
@@ -2764,6 +2733,7 @@ void populateAuthorAndTimestamp(String tabgroup) {
   Map tabgroupToAuthor    = new HashMap();
   Map tabgroupToTimestamp = new HashMap();
   tabgroupToAuthor.put("Feature", "Feature/Main/Feature_author");
+  tabgroupToAuthor.put("Shape", "Shape/Vars/Shape_author");
   tabgroupToTimestamp.put("Feature", "Feature/Main/Feature_timestamp");
   String authorPath    = tabgroupToAuthor.get(tabgroup);
   String timestampPath = tabgroupToTimestamp.get(tabgroup);
@@ -2776,22 +2746,12 @@ void onShowFeature () {
   saveTabGroup("Feature");
 }
 
-void onShowPoint () {
-  saveTabGroup("Point");
-}
-
-void onShowLine () {
-  saveTabGroup("Line");
-}
-
-void onShowPolygon () {
-  saveTabGroup("Polygon");
+void onShowShape () {
+  saveTabGroup("Shape");
 }
 
 addOnEvent("Feature", "show", "onShowFeature()");
-addOnEvent("Point", "show", "onShowPoint()");
-addOnEvent("Line", "show", "onShowLine()");
-addOnEvent("Polygon", "show", "onShowPolygon()");
+addOnEvent("Shape", "show", "onShowShape()");
 
 void onClickUserListUserList () {
   newTab("Control", true);
@@ -2806,19 +2766,9 @@ void onClickControlCreateFeature () {
   newFeature();
 }
 
-void onClickControlCreatePoint () {
+void onClickControlCreateShape () {
   parentTabgroup__ = "Control";
-  newPoint();
-}
-
-void onClickControlCreateLine () {
-  parentTabgroup__ = "Control";
-  newLine();
-}
-
-void onClickControlCreatePolygon () {
-  parentTabgroup__ = "Control";
-  newPolygon();
+  newShape();
 }
 
 
@@ -2830,9 +2780,7 @@ void onClickControlCreatePolygon () {
 
 addOnEvent("User_List/User_List/User_List", "click", "onClickUserListUserList()");
 addOnEvent("Control/IDs/Create_Feature", "click", "onClickControlCreateFeature()");
-addOnEvent("Control/Vars/Create_Point", "click", "onClickControlCreatePoint()");
-addOnEvent("Control/Vars/Create_Line", "click", "onClickControlCreateLine()");
-addOnEvent("Control/Vars/Create_Polygon", "click", "onClickControlCreatePolygon()");
+addOnEvent("Control/Vars/Create_Shape", "click", "onClickControlCreateShape()");
 addOnEvent("Feature/Main/Find_This_in_The_Map", "click", "onClickFeatureFindThisinTheMap()");
 
 /******************************************************************************/
@@ -2858,7 +2806,7 @@ void removeNavigationButtons() {
 void addNavigationButtons(String tabgroup) {
   removeNavigationButtons();
   List tabgroupsToValidate = new ArrayList();
-  tabgroupsToValidate.add("Control");
+  
   addNavigationButton("new", new ActionButtonCallback() {
     actionOnLabel() {
       "{New}";
@@ -3149,79 +3097,26 @@ void newFeature (){
   newFeature(null);
 }
 
-void newPoint(String parent){
-  String tabgroup = "Point";
+void newShape(String parent){
+  String tabgroup = "Shape";
   if (!isNull(parent)) {
     triggerAutoSave();
     parentTabgroup   = parent;
     parentTabgroup__ = parent;
   }
-  if (isNull("Control/IDs/Next_Point_ID")) {
-    showWarning("{Alert}", "{A_next_ID_has_not_been_entered_please_provide_one}");
-    return;
-  }
+  
 
   setUuid(tabgroup, null);
   newTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-  incAutoNum("Point/Shape_Note/Point_ID");
+  
 
   executeOnEvent(tabgroup, "create");
 }
 
-void newPoint (){
-  newPoint(null);
-}
-
-void newLine(String parent){
-  String tabgroup = "Line";
-  if (!isNull(parent)) {
-    triggerAutoSave();
-    parentTabgroup   = parent;
-    parentTabgroup__ = parent;
-  }
-  if (isNull("Control/IDs/Next_Line_ID")) {
-    showWarning("{Alert}", "{A_next_ID_has_not_been_entered_please_provide_one}");
-    return;
-  }
-
-  setUuid(tabgroup, null);
-  newTabGroup(tabgroup);
-  populateAuthorAndTimestamp(tabgroup);
-  populateEntityListsInTabGroup(tabgroup);
-  incAutoNum("Line/Shape_Note/Line_ID");
-
-  executeOnEvent(tabgroup, "create");
-}
-
-void newLine (){
-  newLine(null);
-}
-
-void newPolygon(String parent){
-  String tabgroup = "Polygon";
-  if (!isNull(parent)) {
-    triggerAutoSave();
-    parentTabgroup   = parent;
-    parentTabgroup__ = parent;
-  }
-  if (isNull("Control/IDs/Next_Polygon_ID")) {
-    showWarning("{Alert}", "{A_next_ID_has_not_been_entered_please_provide_one}");
-    return;
-  }
-
-  setUuid(tabgroup, null);
-  newTabGroup(tabgroup);
-  populateAuthorAndTimestamp(tabgroup);
-  populateEntityListsInTabGroup(tabgroup);
-  incAutoNum("Polygon/Shape_Note/Polygon_ID");
-
-  executeOnEvent(tabgroup, "create");
-}
-
-void newPolygon (){
-  newPolygon(null);
+void newShape (){
+  newShape(null);
 }
 void duplicateFeature(){
   String tabgroup = "Feature";
@@ -3270,106 +3165,12 @@ void duplicateFeature(){
     }
   });
 }
-void duplicatePoint(){
-  String tabgroup = "Point";
+void duplicateShape(){
+  String tabgroup = "Shape";
   String uuidOld = getUuid(tabgroup);
   setUuid(tabgroup, "");
   disableAutoSave(tabgroup);
-  incAutoNum("Point/Shape_Note/Point_ID");
-  clearGpsInTabGroup(tabgroup);
-  populateAuthorAndTimestamp(tabgroup);
-  populateEntityListsInTabGroup(tabgroup);
   
-  executeOnEvent(tabgroup, "copy");
-
-  saveCallback = new SaveCallback() {
-    onSave(uuid, newRecord) {
-      setUuid(tabgroup, uuid);
-
-      timedFetchAll(getDuplicateRelnQuery(uuidOld), new FetchCallback(){
-        onFetch(result) {
-          Log.e("Module", result.toString());
-
-          if (result != null && result.size() >= 1) {
-            parentTabgroup__ = result.get(0).get(4);
-            parentTabgroup__ = parentTabgroup__.replaceAll(" ", "_");
-          }
-
-          makeDuplicateRelationships(result, getUuid(tabgroup));
-
-          showToast("{Duplicated_record}");
-          dialog.dismiss();
-        }
-      });
-
-      saveTabGroup(tabgroup);
-    }
-  };
-
-  String extraDupeAttributes = "";
-  timedFetchAll(getDuplicateAttributeQuery(uuidOld, extraDupeAttributes), new FetchCallback(){
-    onFetch(result) {
-      excludeAttributes = new ArrayList();
-
-      
-
-      duplicateTabGroup(tabgroup, null, getExtraAttributes(result), excludeAttributes, saveCallback);
-    }
-  });
-}
-void duplicateLine(){
-  String tabgroup = "Line";
-  String uuidOld = getUuid(tabgroup);
-  setUuid(tabgroup, "");
-  disableAutoSave(tabgroup);
-  incAutoNum("Line/Shape_Note/Line_ID");
-  clearGpsInTabGroup(tabgroup);
-  populateAuthorAndTimestamp(tabgroup);
-  populateEntityListsInTabGroup(tabgroup);
-  
-  executeOnEvent(tabgroup, "copy");
-
-  saveCallback = new SaveCallback() {
-    onSave(uuid, newRecord) {
-      setUuid(tabgroup, uuid);
-
-      timedFetchAll(getDuplicateRelnQuery(uuidOld), new FetchCallback(){
-        onFetch(result) {
-          Log.e("Module", result.toString());
-
-          if (result != null && result.size() >= 1) {
-            parentTabgroup__ = result.get(0).get(4);
-            parentTabgroup__ = parentTabgroup__.replaceAll(" ", "_");
-          }
-
-          makeDuplicateRelationships(result, getUuid(tabgroup));
-
-          showToast("{Duplicated_record}");
-          dialog.dismiss();
-        }
-      });
-
-      saveTabGroup(tabgroup);
-    }
-  };
-
-  String extraDupeAttributes = "";
-  timedFetchAll(getDuplicateAttributeQuery(uuidOld, extraDupeAttributes), new FetchCallback(){
-    onFetch(result) {
-      excludeAttributes = new ArrayList();
-
-      
-
-      duplicateTabGroup(tabgroup, null, getExtraAttributes(result), excludeAttributes, saveCallback);
-    }
-  });
-}
-void duplicatePolygon(){
-  String tabgroup = "Polygon";
-  String uuidOld = getUuid(tabgroup);
-  setUuid(tabgroup, "");
-  disableAutoSave(tabgroup);
-  incAutoNum("Polygon/Shape_Note/Polygon_ID");
   clearGpsInTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
@@ -3412,9 +3213,7 @@ void duplicatePolygon(){
   });
 }
 addOnEvent("Feature", "save", "populateEntityListsOfArchEnt(\"Feature\")");
-addOnEvent("Point", "save", "populateEntityListsOfArchEnt(\"Point\")");
-addOnEvent("Line", "save", "populateEntityListsOfArchEnt(\"Line\")");
-addOnEvent("Polygon", "save", "populateEntityListsOfArchEnt(\"Polygon\")");
+addOnEvent("Shape", "save", "populateEntityListsOfArchEnt(\"Shape\")");
 
 void doNotDelete(){
   showToast("{Delete_Cancelled}");
@@ -3423,13 +3222,9 @@ void doNotDelete(){
 addOnEvent("User_List", "show", "removeNavigationButtons()");
 addOnEvent("Control", "show", "removeNavigationButtons()");
 addOnEvent("Feature", "show", "removeNavigationButtons()");
-addOnEvent("Point", "show", "removeNavigationButtons()");
-addOnEvent("Line", "show", "removeNavigationButtons()");
-addOnEvent("Polygon", "show", "removeNavigationButtons()");
+addOnEvent("Shape", "show", "removeNavigationButtons()");
 addOnEvent("Feature", "show", "addNavigationButtons(\"Feature\")");
-addOnEvent("Point", "show", "addNavigationButtons(\"Point\")");
-addOnEvent("Line", "show", "addNavigationButtons(\"Line\")");
-addOnEvent("Polygon", "show", "addNavigationButtons(\"Polygon\")");
+addOnEvent("Shape", "show", "addNavigationButtons(\"Shape\")");
 
 /******************************************************************************/
 /*                                   SEARCH                                   */
@@ -3443,9 +3238,7 @@ addOnEvent("Control/Search/Entity_Types"  , "click" , "search()");
 entityTypes = new ArrayList();
 entityTypes.add(new NameValuePair("{All}", ""));
 entityTypes.add(new NameValuePair("{Feature}", "Feature"));
-entityTypes.add(new NameValuePair("{Point}", "Point"));
-entityTypes.add(new NameValuePair("{Line}", "Line"));
-entityTypes.add(new NameValuePair("{Polygon}", "Polygon"));
+entityTypes.add(new NameValuePair("{Shape}", "Shape"));
 populateDropDown("Control/Search/Entity_Types", entityTypes);
 
 void clearSearch(){
@@ -3494,38 +3287,8 @@ void loadFeatureFrom(String uuid) {
   executeOnEvent(tabgroup, "prefetch");
   showTabGroup(tabgroup, uuid, cb);
 }
-void loadPointFrom(String uuid) {
-  String tabgroup = "Point";
-  setUuid(tabgroup, uuid);
-  if (isNull(uuid)) return;
-
-  FetchCallback cb = new FetchCallback() {
-    onFetch(result) {
-      populateEntityListsInTabGroup(tabgroup);
-      executeOnEvent(tabgroup, "fetch");
-    }
-  };
-
-  executeOnEvent(tabgroup, "prefetch");
-  showTabGroup(tabgroup, uuid, cb);
-}
-void loadLineFrom(String uuid) {
-  String tabgroup = "Line";
-  setUuid(tabgroup, uuid);
-  if (isNull(uuid)) return;
-
-  FetchCallback cb = new FetchCallback() {
-    onFetch(result) {
-      populateEntityListsInTabGroup(tabgroup);
-      executeOnEvent(tabgroup, "fetch");
-    }
-  };
-
-  executeOnEvent(tabgroup, "prefetch");
-  showTabGroup(tabgroup, uuid, cb);
-}
-void loadPolygonFrom(String uuid) {
-  String tabgroup = "Polygon";
+void loadShapeFrom(String uuid) {
+  String tabgroup = "Shape";
   setUuid(tabgroup, uuid);
   if (isNull(uuid)) return;
 
@@ -3603,7 +3366,7 @@ void fillInGPS(String tabgroup) {
                  "       y(transform(geospatialcolumn,                4326)) as latitude, " +
                  "       x(transform(geospatialcolumn, "+getModuleSrid()+")) as easting, " +
                  "       y(transform(geospatialcolumn, "+getModuleSrid()+")) as northing " +
-                 "  FROM latestnondeletedarchent, vocabulary " +
+                 "  FROM latestnondeletedarchent " +
                  " WHERE uuid = '" + currentUuid + "';";
 
   fetchOne(query, new FetchCallback() {
@@ -3690,9 +3453,7 @@ void loadOrCreateEntityFromScannedAttrib(
 /*                       AUTONUMBERING HELPER FUNCTIONS                       */
 /******************************************************************************/
 Map AUTONUM_DEST_TO_SOURCE = new HashMap();
-AUTONUM_DEST_TO_SOURCE.put("Point/Shape_Note/Point_ID", "Control/IDs/Next_Point_ID");
-AUTONUM_DEST_TO_SOURCE.put("Line/Shape_Note/Line_ID", "Control/IDs/Next_Line_ID");
-AUTONUM_DEST_TO_SOURCE.put("Polygon/Shape_Note/Polygon_ID", "Control/IDs/Next_Polygon_ID");
+
 
 /*
  * If value of field specified by `ref` is null, sets the field to `defaultVal`,
@@ -3880,10 +3641,17 @@ for (m : ENTITY_MENUS) {
 /*                             HANDWRITTEN LOGIC                              */
 /******************************************************************************/
 
-/************************************ MAP *************************************/
 final String MAP_REF = "Control/Map/Map";
 String DATA_ENTRY_LAYER;
 int    DATA_ENTRY_LAYER_ID;
+
+/**************************** SHAPE AUTONUMBERING *****************************/
+AUTONUM_DEST_TO_SOURCE.put("Feature/Main/ID",             "Control/IDs/Next_Point_ID");
+AUTONUM_DEST_TO_SOURCE.put("Shape/Shape_Note/Line_ID",    "Control/IDs/Next_Line_ID");
+AUTONUM_DEST_TO_SOURCE.put("Shape/Shape_Note/Polygon_ID", "Control/IDs/Next_Polygon_ID");
+
+for (String ref : AUTONUM_DEST_TO_SOURCE.values())
+  persistOverSessions(ref, "1");
 
 boolean geoListHasInstanceOf(Class clazz) {
   List geometry = getGeometryList(MAP_REF, DATA_ENTRY_LAYER_ID);
@@ -3893,8 +3661,24 @@ boolean geoListHasInstanceOf(Class clazz) {
   return false;
 }
 
+void incShapeAutoNum() {
+  String refLine  = "Shape/Shape_Note/Line_ID";
+  String refPoly  = "Shape/Shape_Note/Polygon_ID";
+  if (geoListHasInstanceOf(Line   .class)) incAutoNum(refLine);
+  if (geoListHasInstanceOf(Polygon.class)) incAutoNum(refPoly);
+}
+
+void incFeatureAutoNum() {
+  String refPoint = "Feature/Main/ID";
+  incAutoNum(refPoint);
+}
+
+addOnEvent("Shape",   "create", "incShapeAutoNum()");
+addOnEvent("Feature", "create", "incFeatureAutoNum()");
+
+/************************************ MAP *************************************/
 void clearGeometry() {
-  List    geometry = getGeometryList(MAP_REF, DATA_ENTRY_LAYER_ID);
+  List geometry = getGeometryList(MAP_REF, DATA_ENTRY_LAYER_ID);
 
   if (geometry == null)     return;
   if (geometry.size() == 0) return;
@@ -3909,7 +3693,7 @@ boolean checkForGeometry() {
   List geometry = getGeometryList(MAP_REF, DATA_ENTRY_LAYER_ID);
 
   if (geometry == null || geometry.size() != 1) {
-    String head = "Cannot Create Shape";
+    String head = "Cannot Create Record";
     String body = "Exactly one shape must be present on the data entry layer.";
     showWarning(head, body);
 
@@ -3919,10 +3703,10 @@ boolean checkForGeometry() {
   }
 }
 
-void onClickControlCreateShape() {
-  if (geoListHasInstanceOf(Point  .class)) onClickControlCreatePoint();
-  if (geoListHasInstanceOf(Line   .class)) onClickControlCreateLine();
-  if (geoListHasInstanceOf(Polygon.class)) onClickControlCreatePolygon();
+void onClickControlCreateRecord() {
+  if (geoListHasInstanceOf(Point  .class)) onClickControlCreateFeature();
+  if (geoListHasInstanceOf(Line   .class)) onClickControlCreateShape();
+  if (geoListHasInstanceOf(Polygon.class)) onClickControlCreateShape();
 }
 
 void centreMe() {
@@ -3943,8 +3727,13 @@ boolean findThisInTheMap() {
 
   boolean isFindable = !isNull(lonStr) && !isNull(latStr);
   if (!isFindable) {
-    String head = "Cannot Find Point in Map";
-    String body = "The 'Latitude' and 'Longitude' fields must be filled in.";
+    String head = "";
+    String body = "";
+
+    head += "Cannot Find Point in Map";
+    body += "The 'Latitude' and 'Longitude' fields must be filled in. Please ";
+    body += "tap the 'Take From GPS' button to do so.";
+
     showWarning(head, body);
     return false;
   }
@@ -3956,21 +3745,25 @@ boolean findThisInTheMap() {
   return true;
 }
 
+void fillInGPSForFeature() {
+  fillInGPS("Feature");
+}
+
 addOnEventCond("Feature/Main/Find_This_in_The_Map", "click", "findThisInTheMap()");
 
-addOnEventCond("Control/Map/Create_Shape", "click", "checkForGeometry()");
-addOnEvent    ("Control/Map/Create_Shape", "click", "onClickControlCreateShape()");
+addOnEventCond("Control/Map/Create_Record", "click", "checkForGeometry()");
+addOnEvent    ("Control/Map/Create_Record", "click", "onClickControlCreateRecord()");
 
 addOnEvent(
-    "Control/Map/Create_Shape",
+    "Control/Map/Create_Record",
     "click",
     "setAutoSaveGeometry(getGeometryList(MAP_REF, DATA_ENTRY_LAYER_ID))",
     Integer.MAX_VALUE
 );
 
-addOnEvent("Point",   "save", "clearGeometry()");
-addOnEvent("Line",    "save", "clearGeometry()");
-addOnEvent("Polygon", "save", "clearGeometry()");
+addOnEvent("Feature", "save", "clearGeometry()");
+addOnEvent("Feature", "save", "fillInGPSForFeature()");
+addOnEvent("Shape",   "save", "clearGeometry()");
 
 addOnEvent("Control/Map", "show",  "refreshMap()");
 addOnEvent("Control/Map", "show",  "redrawGcValueLayers()");
@@ -4011,7 +3804,7 @@ void initDefaultColours() {
 }
 
 void populateColourToAssign() {
-  String ref = "Control/Map/Colour_to_Assign";
+  String ref = "Control/IDs/Colour_to_Assign";
 
   List opts = new ArrayList();
   for (entry : COLOR_TO_NAME.entrySet()) {
@@ -4025,8 +3818,8 @@ void populateColourToAssign() {
 }
 
 void assignColor() {
-  String refGcVal  = "Control/Map/GC_Value";
-  String refColour = "Control/Map/Colour_to_Assign";
+  String refGcVal  = "Control/IDs/GC_Value";
+  String refColour = "Control/IDs/Colour_to_Assign";
 
   String gcVal  = getMenuValue (refGcVal);
   String colour = getFieldValue(refColour);
@@ -4059,7 +3852,7 @@ void assignColor() {
 }
 
 initDefaultColours();
-addOnEvent("Control/Map/Assign_Colour", "click", "assignColor()");
+addOnEvent("Control/IDs/Assign_Colour", "click", "assignColor()");
 
 /* Displays the geometry of each entity whose menu, by the name of `attribName`,
  * has `vocabName` saved in it. The geometry is displayed in whatever colour is
@@ -4228,6 +4021,13 @@ addOnEvent("Control/Search", "show", "populateSelectUser()");
 
 addOnEvent("Control/Search/Select_User", "click", "search()");
 
+entityTypes = new ArrayList();
+entityTypes.add(new NameValuePair("{All}", ""));
+entityTypes.add(new NameValuePair("{Feature}", "Feature"));
+entityTypes.add(new NameValuePair("{Shape} (Line)", "Shape LINESTRING"));
+entityTypes.add(new NameValuePair("{Shape} (Polygon)", "Shape POLYGON"));
+populateDropDown("Control/Search/Entity_Types", entityTypes);
+
 void populateSelectUser(){
   String refSearchUsers = "Control/Search/Select_User";
   String getNonDeletedUsersQuery = "SELECT userid, fname || ' ' || lname "+
@@ -4253,31 +4053,62 @@ void search(){
   String refEntityTypes = tabgroup + "/Search/Entity_Types";
   String refSelectUser  = tabgroup + "/Search/Select_User";
 
-  String type = getFieldValue(refEntityTypes);
-  String term = getFieldValue(refSearchTerm);
-  String user = getFieldValue(refSelectUser);
+  String type = getSearchArchEntType(refEntityTypes);
+  String term = getFieldValue       (refSearchTerm);
+  String user = getFieldValue       (refSelectUser);
+  String geo  = getSearchGeoType    (refEntityTypes);
   if (isNull(user)) return;
-  String searchQuery = "SELECT uuid, response " +
-                       "  FROM latestNonDeletedArchEntFormattedIdentifiers  " +
+  String searchQuery = "SELECT uuid, response, aenttypename " +
+                       "  FROM latestNonDeletedArchEntFormattedIdentifiers " +
+                       "  JOIN latestnondeletedarchent USING (uuid) " +
                        " WHERE uuid in (SELECT uuid " +
                        "                  FROM latestNonDeletedArchEntIdentifiers " +
                        "                 WHERE measure LIKE '{term}%'  " +
-                       "                   AND ( aenttypename LIKE '{type}' OR '' = '{type}' ) " +
+                       "                   AND ( aenttypename = '{type}' OR '' = '{type}' ) " +
                        "                   AND ( userid = {user} OR -1 = {user}) " +
                        "                ) " +
+                       " AND geometrytype(geometryn(geospatialcolumn, 1)) = '{geo}' OR '{geo}' = ''" +
                        " ORDER BY response " +
                        " LIMIT ? " +
-                       "OFFSET ? ";
+                       "OFFSET ?";
   searchQuery = replaceFirst(searchQuery, "{term}", term);
   searchQuery = replaceFirst(searchQuery, "{type}", type);
   searchQuery = replaceFirst(searchQuery, "{type}", type);
   searchQuery = replaceFirst(searchQuery, "{user}", user);
   searchQuery = replaceFirst(searchQuery, "{user}", user);
+  searchQuery = replaceFirst(searchQuery, "{geo}",  geo);
+  searchQuery = replaceFirst(searchQuery, "{geo}",  geo);
 
   populateCursorList(refEntityList, searchQuery, 25);
   refreshTabgroupCSS(tabgroup);
 
   Log.d("Module", "Search query: " + searchQuery);
+}
+
+String getSearchArchEntType(String ref) {
+  String val = getFieldValue(ref);
+  if (isNull(val))
+    val = "";
+
+  String[] vals = val.split(" ");
+
+  if (vals.length >= 1)
+    return vals[0];
+
+  return "";
+}
+
+String getSearchGeoType(String ref) {
+  String val = getFieldValue(ref);
+  if (isNull(val))
+    val = "";
+
+  String[] vals = val.split(" ");
+
+  if (vals.length >= 2)
+    return vals[1];
+
+  return "";
 }
 
 

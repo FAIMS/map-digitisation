@@ -51,7 +51,7 @@ replacement="
               <Select_User\/>"
 perl -0777 -i.original -pe "s/$string/$replacement/igs" ui_schema.xml
 
-# Add Create_Shape button to map
+# Add Create_Record button to map
 string="
         <trigger ref=\"Center_Me_1\">
           <label>{Center_Me}<\/label>
@@ -67,8 +67,8 @@ replacement="
           <\/group>
           <group ref=\"Col_1\" faims_style=\"even\">
             <label\/>
-            <trigger ref=\"Create_Shape\">
-              <label>{Create_Shape}<\/label>
+            <trigger ref=\"Create_Record\">
+              <label>{Create_Record}<\/label>
             <\/trigger>
           <\/group>
         <\/group>"
@@ -82,7 +82,7 @@ replacement="
                   <Center_Me_1\/>
                 <\/Col_0>
                 <Col_1>
-                  <Create_Shape\/>
+                  <Create_Record\/>
                 <\/Col_1>
               <\/Colgroup_A>
               <Select_User\/>"
@@ -99,6 +99,6 @@ EOF
 
 cat << EOF >> english.0.properties
 All=All
-Create_Shape=Create Shape
+Create_Record=Create Record
 Select_User=Select User
 EOF
