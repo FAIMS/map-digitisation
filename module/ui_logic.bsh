@@ -1132,12 +1132,12 @@ void timedPopulateCursorList(String ref, String q, int limit) {
 
 void setUpTypeHierarchy() {
   //- 
-  //  - Shape
   //  - Feature
+  //  - Shape
 
   n0 = Tree("", 1);
-  n1 = Tree("Shape", 1);
-  n2 = Tree("Feature", 1);
+  n1 = Tree("Feature", 1);
+  n2 = Tree("Shape", 1);
 
   n0.addChild(n1);
   n0.addChild(n2);
@@ -3851,8 +3851,13 @@ void assignColor() {
   showToast(msg);
 }
 
+void setDefaultGCOption() {
+  setMenuValue("Feature/GControl/GC", "{No}");
+}
+
 initDefaultColours();
 addOnEvent("Control/IDs/Assign_Colour", "click", "assignColor()");
+addOnEvent("Feature", "create", "setDefaultGCOption()");
 
 /* Displays the geometry of each entity whose menu, by the name of `attribName`,
  * has `vocabName` saved in it. The geometry is displayed in whatever colour is

@@ -7,9 +7,9 @@
       <formatString>$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
-    <property name="Feature author" type="measure" isIdentifier="true">
+    <property name="Feature author" type="measure">
       <description></description>
-      <formatString> $2</formatString>
+      <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
     <property name="Feature timestamp" type="measure">

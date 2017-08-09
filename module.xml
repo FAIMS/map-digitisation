@@ -37,7 +37,7 @@
 </Control>
 
 <Feature>
-  <fmt>{{ID}} {{author}}</fmt>
+  <fmt>{{ID}}</fmt>
   <Main>
     <ID c="readonly"/>
     <author/>
@@ -319,8 +319,13 @@ void assignColor() {
   showToast(msg);
 }
 
+void setDefaultGCOption() {
+  setMenuValue("Feature/GControl/GC", "{No}");
+}
+
 initDefaultColours();
 addOnEvent("Control/IDs/Assign_Colour", "click", "assignColor()");
+addOnEvent("Feature", "create", "setDefaultGCOption()");
 
 /* Displays the geometry of each entity whose menu, by the name of `attribName`,
  * has `vocabName` saved in it. The geometry is displayed in whatever colour is
