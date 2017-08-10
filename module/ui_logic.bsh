@@ -4072,7 +4072,7 @@ void search(){
                        "                   AND ( aenttypename = '{type}' OR '' = '{type}' ) " +
                        "                   AND ( userid = {user} OR -1 = {user}) " +
                        "                ) " +
-                       " AND geometrytype(geometryn(geospatialcolumn, 1)) = '{geo}' OR '{geo}' = ''" +
+                       " AND (geometrytype(geometryn(geospatialcolumn, 1)) = '{geo}' OR '{geo}' = '')" +
                        " ORDER BY response " +
                        " LIMIT ? " +
                        "OFFSET ?";
