@@ -1,5 +1,5 @@
 /*
- * GENERATED WITH FAIMS-TOOLS, SHA1: e2f2cddbbadc83876da257a4911fa4367493f5e7
+ * GENERATED WITH FAIMS-TOOLS, SHA1: 5b14af1bade7ab77a5b509ccee26572dc6d27437
  */
 import android.util.Log;
 import android.os.Build.MODEL;
@@ -3994,7 +3994,7 @@ void redrawGcValueLayers() {
 /********************************** MAP INIT **********************************/
 
 void initMap() {
-  // showBaseMap(MAP_REF, "Base Map", "files/data/R1980_YambolElhovoExt.tif");
+  showBaseMap(MAP_REF, "Base Map", "files/data/K-35-042-3.tif");
 
   setMapZoom(MAP_REF, 15.0f);
 
