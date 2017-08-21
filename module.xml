@@ -109,7 +109,6 @@
 </Shape>
 
 <logic><![CDATA[
-final String MAP_REF = "Control/Map/Map";
 String DATA_ENTRY_LAYER;
 int    DATA_ENTRY_LAYER_ID;
 
@@ -190,26 +189,26 @@ void refreshMap() {
 }
 
 boolean findThisInTheMap() {
-  String lonStr = getFieldValue("Feature/Main/Longitude");
-  String latStr = getFieldValue("Feature/Main/Latitude");
+  String EasStr = getFieldValue("Feature/Main/Easting");
+  String norStr = getFieldValue("Feature/Main/Northing");
 
-  boolean isFindable = !isNull(lonStr) && !isNull(latStr);
+  boolean isFindable = !isNull(EasStr) && !isNull(norStr);
   if (!isFindable) {
     String head = "";
     String body = "";
 
     head += "Cannot Find Point in Map";
-    body += "The 'Latitude' and 'Longitude' fields must be filled in. Please ";
+    body += "The 'Northing' and 'Easting' fields must be filled in. Please ";
     body += "tap the 'Take From GPS' button to do so.";
 
     showWarning(head, body);
     return false;
   }
 
-  double lonDub = Double.parseDouble(lonStr);
-  double latDub = Double.parseDouble(latStr);
+  double easDub = Double.parseDouble(EasStr);
+  double norDub = Double.parseDouble(norStr);
 
-  setMapFocusPoint(MAP_REF, lonDub, latDub);
+  setMapFocusPoint(MAP_REF, easDub, norDub);
   return true;
 }
 
