@@ -4128,7 +4128,7 @@ void redrawGcValueLayers() {
 /********************************** MAP INIT **********************************/
 
 void initMap() {
-  showBaseMap(MAP_REF, "Base Map", "files/data/K-35-042-3.tif");
+  showBaseMap(MAP_REF, "Base Map", "files/data/K-35-053-3_Elenovo.tif");
 
   setMapZoom(MAP_REF, 15.0f);
 
