@@ -4249,6 +4249,8 @@ String getSearchGeoType(String ref) {
 
   return "";
 }
+setFileSyncEnabled(false);
+setSyncEnabled    (false);
 
 
 
