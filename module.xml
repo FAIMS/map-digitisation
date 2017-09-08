@@ -55,16 +55,6 @@
         <opt>Other</opt>
       </opts>
     </Feature_Type>
-    <Map_Symbol>
-    	<opts>
-     	    <opt>Hairy brown circle</opt>
-    	    <opt>Black diamond with a dot inside</opt>
-    	    <opt>Hairy black diamond with a dot inside</opt>
-    	    <opt>Black triangle with a dot inside</opt>
-    	    <opt>Hairy black triangle with a dot inside</opt>
-    	    <opt>Other (describe in annotation)</opt>
-    	</opts>
-    </Map_Symbol>
     <Source f="persist">
       <opts>
         <opt>Topomap</opt>

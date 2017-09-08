@@ -29,14 +29,15 @@
           <Control>
             <Map>
               <Map/>
-              <Colgroup_1>
-                <Col_1>
+              <Colgroup_A>
+                <Col_0>
                   <Center_Me_1/>
+                </Col_0>
+                <Col_1>
+                  <Create_Record/>
                 </Col_1>
-                <Col_2>
-                  <Save_Map_Settings_1/>
-                </Col_2>
-              </Colgroup_1>
+              </Colgroup_A>
+              <Select_User/>
             </Map>
             <IDs>
               <Create_Feature/>
@@ -106,7 +107,6 @@
               <Take_From_GPS_1/>
               <Find_This_in_The_Map/>
               <Feature_Type/>
-              <Map_Symbol/>
               <Source/>
               <Note/>
             </Main>
@@ -195,18 +195,18 @@
         <input faims_map="true" ref="Map">
           <label/>
         </input>
-        <group ref="Colgroup_1" faims_style="orientation">
+        <group ref="Colgroup_A" faims_style="orientation">
           <label/>
-          <group ref="Col_1" faims_style="even">
+          <group ref="Col_0" faims_style="even">
             <label/>
             <trigger ref="Center_Me_1">
               <label>{Center_Me}</label>
             </trigger>
           </group>
-          <group ref="Col_2" faims_style="even">
+          <group ref="Col_1" faims_style="even">
             <label/>
-            <trigger ref="Save_Map_Settings_1">
-              <label>{Save_Map_Settings}</label>
+            <trigger ref="Create_Record">
+              <label>{Create_Record}</label>
             </trigger>
           </group>
         </group>
@@ -372,13 +372,6 @@
             <value>Options not loaded</value>
           </item>
         </select1>
-        <select1 faims_attribute_name="Map Symbol" faims_attribute_type="vocab" ref="Map_Symbol">
-          <label>{Map_Symbol}</label>
-          <item>
-            <label>Options not loaded</label>
-            <value>Options not loaded</value>
-          </item>
-        </select1>
         <select1 faims_attribute_name="Source" faims_attribute_type="vocab" ref="Source">
           <label>{Source}</label>
           <item>
@@ -415,7 +408,7 @@
         <input faims_attribute_name="Other Description" faims_attribute_type="measure" ref="Other_Description">
           <label>{Other_Description}</label>
         </input>
-        <select faims_sync="true" type="camera" faims_attribute_name="Picture" faims_attribute_type="measure" ref="Picture" faims_certainty="false">
+        <select faims_sync="true" type="camera" faims_attribute_name="Picture" faims_attribute_type="measure" ref="Picture">
           <label>{Picture}</label>
           <item>
             <label>Options not loaded</label>
