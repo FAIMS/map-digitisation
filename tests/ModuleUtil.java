@@ -258,6 +258,15 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: dropdown
+        Ref:  Feature/Main/Map_Symbol
+     */
+    public static View get_Feature_Main_MapSymbol(Solo solo) {
+        String ref = "Feature/Main/Map_Symbol";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: dropdown
         Ref:  Feature/Main/Source
      */
     public static View get_Feature_Main_Source(Solo solo) {

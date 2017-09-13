@@ -107,6 +107,7 @@
               <Take_From_GPS_1/>
               <Find_This_in_The_Map/>
               <Feature_Type/>
+              <Map_Symbol/>
               <Source/>
               <Note/>
             </Main>
@@ -372,6 +373,13 @@
             <value>Options not loaded</value>
           </item>
         </select1>
+        <select1 faims_attribute_name="Map Symbol" faims_attribute_type="vocab" ref="Map_Symbol">
+          <label>{Map_Symbol}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
         <select1 faims_attribute_name="Source" faims_attribute_type="vocab" ref="Source">
           <label>{Source}</label>
           <item>
@@ -408,7 +416,7 @@
         <input faims_attribute_name="Other Description" faims_attribute_type="measure" ref="Other_Description">
           <label>{Other_Description}</label>
         </input>
-        <select faims_sync="true" type="camera" faims_attribute_name="Picture" faims_attribute_type="measure" ref="Picture">
+        <select faims_sync="true" type="camera" faims_attribute_name="Picture" faims_attribute_type="measure" ref="Picture" faims_certainty="false">
           <label>{Picture}</label>
           <item>
             <label>Options not loaded</label>
