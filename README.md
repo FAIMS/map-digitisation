@@ -20,12 +20,14 @@ This module is licensed under an international Creative Commons Attribution 4.0 
 This module will be part of the **FAIMS Demo library** on our publicly accessible Demo server (http://demo.fedarch.org/). 
 
 ## This module contains the following FAIMS features:
--map view tab that renders geotiffs and vectors (sqlite)
--manual feature creation
--automatic coordinate extraction from raster layer
+*map view tab that renders geotiffs and vectors (sqlite)
+*manual feature creation
+*automatic coordinate extraction from raster layer
+*data capture from GPS enabled
 
 ## This module can be used with no or minor modification for:
-digitisation of any maps, pending the adjustment of EPSG to local area
+*digitisation of any maps, pending the adjustment of EPSG to local area
+*feature ground truthing
 
 ## Contact info:
 For more details about the TRAP digitisation project please contact **adela@fedarch.org**.
