@@ -46,7 +46,7 @@
     <Find_This_in_The_Map l="Control/Map">
       Find This in The Map...
     </Find_This_in_The_Map>
-    <Feature_Type f="persist">
+    <Feature_Type f="persist notnull">
       <desc>Comment on Feature type</desc>
       <opts>
         <opt>Mound</opt>
@@ -55,7 +55,7 @@
         <opt>Other</opt>
       </opts>
     </Feature_Type>
-    <Map_Symbol>
+    <Map_Symbol f="notnull">
     	<opts>
      	    <opt>Hairy brown circle</opt>
     	    <opt>Black diamond with a dot inside</opt>
@@ -222,10 +222,6 @@ boolean findThisInTheMap() {
   return true;
 }
 
-void fillInGPSForFeature() {
-  fillInGPS("Feature");
-}
-
 addOnEventCond("Feature/Main/Find_This_in_The_Map", "click", "findThisInTheMap()");
 
 addOnEventCond("Control/Map/Create_Record", "click", "checkForGeometry()");
@@ -239,7 +235,6 @@ addOnEvent(
 );
 
 addOnEvent("Feature", "save", "clearGeometry()");
-addOnEvent("Feature", "save", "fillInGPSForFeature()");
 addOnEvent("Shape",   "save", "clearGeometry()");
 
 addOnEvent("Control/Map", "show",  "refreshMap()");
@@ -594,6 +589,45 @@ String getSearchGeoType(String ref) {
 }
 setFileSyncEnabled(false);
 setSyncEnabled    (false);
+
+/************************* GPS COORDINATE VALIDATION **************************/
+void validateGpsCoordinates() {
+  Set tabGroups = getTakeFromGpsMappings().keySet();
+
+  String prevTabGroup = getPreviouslyDisplayedTabGroup();
+
+  if (!tabGroups.contains(prevTabGroup))
+    return;
+
+  String gpsRefPattern = prevTabGroup +
+      "/*/" +
+      "(" +
+        "(Accuracy)|" +
+        "(Longitude)|" +
+        "(Latitude)|" +
+        "(Easting)|" +
+        "(Northing)" +
+      ")";
+
+  List gpsRefs = getRefsMatching(gpsRefPattern);
+  List nulls   = new ArrayList();
+  for (String ref : gpsRefs) nulls.add(isNull(getFieldValue(ref)));
+
+  boolean isValid = !any(nulls);
+
+  if (!isValid) {
+    String head  = "GPS Coordinates are Invalid";
+    String body  = "Press 'OK' to return to the record and fill in the GPS " +
+                    "coordinates, or 'Cancel' to dismiss this message.";
+    String cbOk  = "loadEntityFrom(getUuid(\"" + prevTabGroup + "\"))";
+    String cbBad = "";
+
+    showAlert(head, body, cbOk, cbBad);
+  }
+}
+
+for (String ref : getTabGroups())
+  addOnEvent(ref, "leave", "validateGpsCoordinates()");
 
 ]]></logic>
 

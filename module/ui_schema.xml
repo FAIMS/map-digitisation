@@ -29,15 +29,17 @@
           <Control>
             <Map>
               <Map/>
-              <Colgroup_A>
-                <Col_0>
-                  <Center_Me_1/>
-                </Col_0>
+              <Colgroup_1>
                 <Col_1>
-                  <Create_Record/>
+                  <Center_Me_1/>
                 </Col_1>
-              </Colgroup_A>
-              <Select_User/>
+                <Col_2>
+                  <Save_Map_Settings_1/>
+                </Col_2>
+                <Col_3>
+                  <Create_Record/>
+                </Col_3>
+              </Colgroup_1>
             </Map>
             <IDs>
               <Create_Feature/>
@@ -196,15 +198,21 @@
         <input faims_map="true" ref="Map">
           <label/>
         </input>
-        <group ref="Colgroup_A" faims_style="orientation">
+        <group ref="Colgroup_1" faims_style="orientation">
           <label/>
-          <group ref="Col_0" faims_style="even">
+          <group ref="Col_1" faims_style="even">
             <label/>
             <trigger ref="Center_Me_1">
               <label>{Center_Me}</label>
             </trigger>
           </group>
-          <group ref="Col_1" faims_style="even">
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <trigger ref="Save_Map_Settings_1">
+              <label>{Save_Map_Settings}</label>
+            </trigger>
+          </group>
+          <group ref="Col_3" faims_style="even">
             <label/>
             <trigger ref="Create_Record">
               <label>{Create_Record}</label>
@@ -366,14 +374,14 @@
         <trigger ref="Find_This_in_The_Map">
           <label>{Find_This_in_The_Map___}</label>
         </trigger>
-        <select1 faims_attribute_name="Feature Type" faims_attribute_type="vocab" ref="Feature_Type">
+        <select1 faims_attribute_name="Feature Type" faims_attribute_type="vocab" ref="Feature_Type" faims_style_class="required">
           <label>{Feature_Type}</label>
           <item>
             <label>Options not loaded</label>
             <value>Options not loaded</value>
           </item>
         </select1>
-        <select1 faims_attribute_name="Map Symbol" faims_attribute_type="vocab" ref="Map_Symbol">
+        <select1 faims_attribute_name="Map Symbol" faims_attribute_type="vocab" ref="Map_Symbol" faims_style_class="required">
           <label>{Map_Symbol}</label>
           <item>
             <label>Options not loaded</label>

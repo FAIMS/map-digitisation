@@ -48,13 +48,13 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{Mound}
-<description></description></term>
+<description> </description></term>
         <term>{Surface_feature}
-<description></description></term>
+<description> </description></term>
         <term>{Artefact_concentration}
-<description></description></term>
+<description> </description></term>
         <term>{Other}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Map Symbol" type="vocab">
@@ -63,17 +63,17 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{Hairy_brown_circle}
-<description></description></term>
+<description> </description></term>
         <term>{Black_diamond_with_a_dot_inside}
-<description></description></term>
+<description> </description></term>
         <term>{Hairy_black_diamond_with_a_dot_inside}
-<description></description></term>
+<description> </description></term>
         <term>{Black_triangle_with_a_dot_inside}
-<description></description></term>
+<description> </description></term>
         <term>{Hairy_black_triangle_with_a_dot_inside}
-<description></description></term>
+<description> </description></term>
         <term>{Other__describe_in_annotation_}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Source" type="vocab">
@@ -82,13 +82,13 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{Topomap}
-<description></description></term>
+<description> </description></term>
         <term>{Atlas}
-<description></description></term>
+<description> </description></term>
         <term>{GC}
-<description></description></term>
+<description> </description></term>
         <term>{Field_survey}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Note" type="measure">
@@ -102,13 +102,13 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{Yes}
-<description></description></term>
+<description> </description></term>
         <term>{Attempted_and_Failed}
-<description></description></term>
+<description> </description></term>
         <term>{No}
-<description></description></term>
+<description> </description></term>
         <term>{No_Observation}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Date Completed" type="measure">
@@ -127,17 +127,17 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{TP}
-<description></description></term>
+<description> </description></term>
         <term>{FP}
-<description></description></term>
+<description> </description></term>
         <term>{FN}
-<description></description></term>
+<description> </description></term>
         <term>{FP}
-<description></description></term>
+<description> </description></term>
         <term>{Indeterminate}
-<description></description></term>
+<description> </description></term>
         <term>{Classificaiton_Error}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Other Description" type="measure">
