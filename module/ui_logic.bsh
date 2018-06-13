@@ -331,6 +331,7 @@ REF_TO_TYPE.put("Control/Search/Search_Button", "button");
 REF_TO_TYPE.put("Control/Search/Entity_Types", "dropdown");
 REF_TO_TYPE.put("Control/Search/Entity_List", "list");
 REF_TO_TYPE.put("Control/Vars/Create_Shape", "button");
+REF_TO_TYPE.put("Feature/Main/CHECK_FOR_MISSING_DATA", "button");
 REF_TO_TYPE.put("Feature/Main/ID", "input");
 REF_TO_TYPE.put("Feature/Main/Feature_author", "input");
 REF_TO_TYPE.put("Feature/Main/Feature_timestamp", "input");
@@ -3167,6 +3168,11 @@ String validateFields(List fields, String format) {
 
 void validateFeature() {
   List f = new ArrayList(); // Fields to be validated
+  f.add(fieldPair("Feature/Main/Latitude", "{Latitude}"));
+  f.add(fieldPair("Feature/Main/Longitude", "{Longitude}"));
+  f.add(fieldPair("Feature/Main/Northing", "{Northing}"));
+  f.add(fieldPair("Feature/Main/Easting", "{Easting}"));
+  f.add(fieldPair("Feature/Main/Accuracy", "{Accuracy}"));
   f.add(fieldPair("Feature/Main/Feature_Type", "{Feature_Type}"));
   f.add(fieldPair("Feature/Main/Map_Symbol", "{Map_Symbol}"));
 
@@ -4741,6 +4747,8 @@ void validateGpsCoordinates() {
 for (String ref : getTabGroups())
   addOnEvent(ref, "leave", "validateGpsCoordinates()");
 
+/********************************* VALIDATION *********************************/
+addOnEvent("Feature/Main/CHECK_FOR_MISSING_DATA", "click", "validateFeature()");
 
 
 /******************************************************************************/

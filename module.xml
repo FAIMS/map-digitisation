@@ -39,10 +39,13 @@
 <Feature>
   <fmt>{{ID}}</fmt>
   <Main>
-    <ID c="readonly"/>
-    <author/>
+    <CHECK_FOR_MISSING_DATA t="button" c="red"/>
+    <cols>
+      <ID c="readonly"/>
+      <author/>
+    </cols>
     <timestamp/>
-    <gps/>
+    <gps f="notnull"/>
     <Find_This_in_The_Map l="Control/Map">
       Find This in The Map...
     </Find_This_in_The_Map>
@@ -629,6 +632,8 @@ void validateGpsCoordinates() {
 for (String ref : getTabGroups())
   addOnEvent(ref, "leave", "validateGpsCoordinates()");
 
+/********************************* VALIDATION *********************************/
+addOnEvent("Feature/Main/CHECK_FOR_MISSING_DATA", "click", "validateFeature()");
 ]]></logic>
 
 </module>

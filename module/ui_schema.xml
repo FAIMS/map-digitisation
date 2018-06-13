@@ -84,18 +84,25 @@
           </Control>
           <Feature>
             <Main>
-              <ID/>
-              <Feature_author/>
-              <Feature_timestamp/>
+              <CHECK_FOR_MISSING_DATA/>
               <Colgroup_1>
+                <Col_1>
+                  <ID/>
+                </Col_1>
+                <Col_2>
+                  <Feature_author/>
+                </Col_2>
+              </Colgroup_1>
+              <Feature_timestamp/>
+              <Colgroup_2>
                 <Col_1>
                   <Latitude/>
                 </Col_1>
                 <Col_2>
                   <Longitude/>
                 </Col_2>
-              </Colgroup_1>
-              <Colgroup_2>
+              </Colgroup_2>
+              <Colgroup_3>
                 <Col_1>
                   <Northing/>
                 </Col_1>
@@ -105,7 +112,7 @@
                 <Col_3>
                   <Accuracy/>
                 </Col_3>
-              </Colgroup_2>
+              </Colgroup_3>
               <Take_From_GPS_1/>
               <Find_This_in_The_Map/>
               <Feature_Type/>
@@ -323,47 +330,59 @@
       <label>{Feature}</label>
       <group ref="Main">
         <label>{Main}</label>
-        <input faims_attribute_name="ID" faims_attribute_type="measure" ref="ID" faims_style_class="readonly">
-          <label>{ID}</label>
-        </input>
-        <input faims_attribute_name="Feature author" faims_attribute_type="measure" ref="Feature_author" faims_read_only="true">
-          <label>{Author}</label>
-        </input>
-        <input faims_attribute_name="Feature timestamp" faims_attribute_type="measure" ref="Feature_timestamp" faims_read_only="true">
-          <label>{Timestamp}</label>
-        </input>
+        <trigger ref="CHECK_FOR_MISSING_DATA" faims_style_class="red">
+          <label>{CHECK_FOR_MISSING_DATA}</label>
+        </trigger>
         <group ref="Colgroup_1" faims_style="orientation">
           <label/>
           <group ref="Col_1" faims_style="even">
             <label/>
-            <input faims_attribute_name="Latitude" faims_attribute_type="measure" ref="Latitude" faims_read_only="true">
+            <input faims_attribute_name="ID" faims_attribute_type="measure" ref="ID" faims_style_class="readonly">
+              <label>{ID}</label>
+            </input>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Feature author" faims_attribute_type="measure" ref="Feature_author" faims_read_only="true">
+              <label>{Author}</label>
+            </input>
+          </group>
+        </group>
+        <input faims_attribute_name="Feature timestamp" faims_attribute_type="measure" ref="Feature_timestamp" faims_read_only="true">
+          <label>{Timestamp}</label>
+        </input>
+        <group ref="Colgroup_2" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Latitude" faims_attribute_type="measure" ref="Latitude" faims_style_class="required" faims_read_only="true">
               <label>{Latitude}</label>
             </input>
           </group>
           <group ref="Col_2" faims_style="even">
             <label/>
-            <input faims_attribute_name="Longitude" faims_attribute_type="measure" ref="Longitude" faims_read_only="true">
+            <input faims_attribute_name="Longitude" faims_attribute_type="measure" ref="Longitude" faims_style_class="required" faims_read_only="true">
               <label>{Longitude}</label>
             </input>
           </group>
         </group>
-        <group ref="Colgroup_2" faims_style="orientation">
+        <group ref="Colgroup_3" faims_style="orientation">
           <label/>
           <group ref="Col_1" faims_style="even">
             <label/>
-            <input faims_attribute_name="Northing" faims_attribute_type="measure" ref="Northing" faims_read_only="true">
+            <input faims_attribute_name="Northing" faims_attribute_type="measure" ref="Northing" faims_style_class="required" faims_read_only="true">
               <label>{Northing}</label>
             </input>
           </group>
           <group ref="Col_2" faims_style="even">
             <label/>
-            <input faims_attribute_name="Easting" faims_attribute_type="measure" ref="Easting" faims_read_only="true">
+            <input faims_attribute_name="Easting" faims_attribute_type="measure" ref="Easting" faims_style_class="required" faims_read_only="true">
               <label>{Easting}</label>
             </input>
           </group>
           <group ref="Col_3" faims_style="even">
             <label/>
-            <input faims_attribute_name="Accuracy" faims_attribute_type="measure" ref="Accuracy" faims_read_only="true">
+            <input faims_attribute_name="Accuracy" faims_attribute_type="measure" ref="Accuracy" faims_style_class="required" faims_read_only="true">
               <label>{Accuracy}</label>
             </input>
           </group>

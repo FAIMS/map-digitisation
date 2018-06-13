@@ -91,9 +91,8 @@ perl -0777 -i.original -pe "s/$string/$replacement/igs" ui_schema.xml
 rm ui_schema.xml.original
 
 cat << EOF >> ui_styling.css
-.readonly {
-  color: #B2B2B2;
-}
+.readonly { color: #B2B2B2; }
+.red      { background-color: red; }
 EOF
 
 cat << EOF >> english.0.properties
