@@ -1,5 +1,5 @@
 /*
- * GENERATED WITH FAIMS-TOOLS, SHA1: 724d2f42c60f81a565c86b6d03c7f29c55b9fafe
+ * GENERATED WITH FAIMS-TOOLS, SHA1: 927dbaf7cd4457aa601859fddec26ab0ae6088e6
  */
 import android.util.Log;
 import android.os.Build.MODEL;
@@ -331,7 +331,6 @@ REF_TO_TYPE.put("Control/Search/Search_Button", "button");
 REF_TO_TYPE.put("Control/Search/Entity_Types", "dropdown");
 REF_TO_TYPE.put("Control/Search/Entity_List", "list");
 REF_TO_TYPE.put("Control/Vars/Create_Shape", "button");
-REF_TO_TYPE.put("Feature/Main/CHECK_FOR_MISSING_DATA", "button");
 REF_TO_TYPE.put("Feature/Main/ID", "input");
 REF_TO_TYPE.put("Feature/Main/Feature_author", "input");
 REF_TO_TYPE.put("Feature/Main/Feature_timestamp", "input");
@@ -1896,8 +1895,8 @@ PerfImageDownloader() {
 
     String filStr = "/sdcard/faims/modules/" + getModuleId() +
         "/files/test.jpg";
-    String urlStr = "https://raw.githubusercontent.com/FAIMS/FAIMS-Tools/" +
-        "master/test-images/construction-2894x1924.jpg";
+    String urlStr = "https://github.com/FAIMS/FAIMS-Tools/raw/master/" +
+        "generators/christian/tests/images/construction-2894x1924.jpg";
 
     if (detectFile(filStr))
       return;
@@ -3173,7 +3172,6 @@ void validateFeature() {
   f.add(fieldPair("Feature/Main/Northing", "{Northing}"));
   f.add(fieldPair("Feature/Main/Easting", "{Easting}"));
   f.add(fieldPair("Feature/Main/Accuracy", "{Accuracy}"));
-  f.add(fieldPair("Feature/Main/Feature_Type", "{Feature_Type}"));
   f.add(fieldPair("Feature/Main/Map_Symbol", "{Map_Symbol}"));
 
   String validationMessage = validateFields(f, "PLAINTEXT");
@@ -3975,15 +3973,15 @@ void takePoint(String tabgroup) {
 
   String accuracy = "" + getGPSEstimatedAccuracy();
   setFieldValue(tabgroupToTabRef.get(tabgroup) + "/Accuracy",  accuracy);
-  setFieldValue(tabgroupToTabRef.get(tabgroup) + "/Longitude", sLatitude);
-  setFieldValue(tabgroupToTabRef.get(tabgroup) + "/Latitude",  sLongitude);
-  setFieldValue(tabgroupToTabRef.get(tabgroup) + "/Easting",   sNorthing);
-  setFieldValue(tabgroupToTabRef.get(tabgroup) + "/Northing",  sEasting);
+  setFieldValue(tabgroupToTabRef.get(tabgroup) + "/Longitude", sLongitude);
+  setFieldValue(tabgroupToTabRef.get(tabgroup) + "/Latitude",  sLatitude);
+  setFieldValue(tabgroupToTabRef.get(tabgroup) + "/Easting",   sEasting);
+  setFieldValue(tabgroupToTabRef.get(tabgroup) + "/Northing",  sNorthing);
 
   List attribs = createAttributeList();
   attribs.add(createEntityAttribute("Accuracy",  "", "", accuracy,   "1.0"));
-  attribs.add(createEntityAttribute("Longitude", "", "", sLatitude,  "1.0"));
-  attribs.add(createEntityAttribute("Latitude",  "", "", sLongitude, "1.0"));
+  attribs.add(createEntityAttribute("Longitude", "", "", sLongitude,  "1.0"));
+  attribs.add(createEntityAttribute("Latitude",  "", "", sLatitude, "1.0"));
   attribs.add(createEntityAttribute("Northing",  "", "", sNorthing,  "1.0"));
   attribs.add(createEntityAttribute("Easting",   "", "", sEasting,   "1.0"));
 
@@ -3993,6 +3991,32 @@ void takePoint(String tabgroup) {
   );
   SaveCallback saveCallback = getDefaultSaveCallback(tabgroup, showToast);
   saveArchEnt(currentUuid, archEntType, geolist, attribs, saveCallback);
+}
+
+/* Sets the value of GPS views for the given tab ref. */
+void fillInGPS(String tabgroup) {
+  Map tabgroupToTabRef = getTakeFromGpsMappings();
+  String currentUuid = getUuid(tabgroup);
+  if (isNull(currentUuid)) {
+    return;
+  }
+
+  String query = "SELECT x(transform(geospatialcolumn,                4326)) as longtiude, " +
+                 "       y(transform(geospatialcolumn,                4326)) as latitude, " +
+                 "       x(transform(geospatialcolumn, "+getModuleSrid()+")) as easting, " +
+                 "       y(transform(geospatialcolumn, "+getModuleSrid()+")) as northing " +
+                 "  FROM latestnondeletedarchent " +
+                 " WHERE uuid = '" + currentUuid + "';";
+
+  fetchOne(query, new FetchCallback() {
+    onFetch(result) {
+      print("[fillInGPS()] Fetched DB transformed geometry: " + result);
+      setFieldValue(tabgroupToTabRef.get(tabgroup) + "/Longitude" , result.get(0));
+      setFieldValue(tabgroupToTabRef.get(tabgroup) + "/Latitude"  , result.get(1));
+      setFieldValue(tabgroupToTabRef.get(tabgroup) + "/Easting"   , result.get(2));
+      setFieldValue(tabgroupToTabRef.get(tabgroup) + "/Northing"  , result.get(3));
+    }
+  });
 }
 
 void clearGpsInTabGroup(String tabgroup) {
@@ -4271,7 +4295,12 @@ void incFeatureAutoNum() {
 addOnEvent("Shape",   "create", "incShapeAutoNum()");
 addOnEvent("Feature", "create", "incFeatureAutoNum()");
 
+addOnEvent("Shape",   "copy", "incShapeAutoNum()");
+addOnEvent("Feature", "copy", "incFeatureAutoNum()");
+
 /************************************ MAP *************************************/
+boolean DO_FILL_IN_GPS_FOR_FEATURE = false;
+
 void clearGeometry() {
   List geometry = getGeometryList(MAP_REF, DATA_ENTRY_LAYER_ID);
 
@@ -4299,6 +4328,8 @@ boolean checkForGeometry() {
 }
 
 void onClickControlCreateRecord() {
+  if (geoListHasInstanceOf(Point  .class)) DO_FILL_IN_GPS_FOR_FEATURE = true;
+
   if (geoListHasInstanceOf(Point  .class)) onClickControlCreateFeature();
   if (geoListHasInstanceOf(Line   .class)) onClickControlCreateShape();
   if (geoListHasInstanceOf(Polygon.class)) onClickControlCreateShape();
@@ -4340,6 +4371,21 @@ boolean findThisInTheMap() {
   return true;
 }
 
+void fillInGPSForFeature() {
+  String gpsRefsPattern = "Feature/*/" + PATTERN_GPS;
+  List gpsRefs = getRefsMatching(gpsRefsPattern);
+
+  List nulls   = new ArrayList();
+  for (String ref : gpsRefs) nulls.add(isNull(getFieldValue(ref)));
+
+  boolean hasGps = !any(nulls);
+
+  if (!hasGps && DO_FILL_IN_GPS_FOR_FEATURE)
+    fillInGPS("Feature");
+
+  DO_FILL_IN_GPS_FOR_FEATURE = false;
+}
+
 addOnEventCond("Feature/Main/Find_This_in_The_Map", "click", "findThisInTheMap()");
 
 addOnEventCond("Control/Map/Create_Record", "click", "checkForGeometry()");
@@ -4353,6 +4399,7 @@ addOnEvent(
 );
 
 addOnEvent("Feature", "save", "clearGeometry()");
+addOnEvent("Feature", "firstsave", "fillInGPSForFeature()");
 addOnEvent("Shape",   "save", "clearGeometry()");
 
 addOnEvent("Control/Map", "show",  "refreshMap()");
@@ -4708,8 +4755,16 @@ String getSearchGeoType(String ref) {
 setFileSyncEnabled(false);
 setSyncEnabled    (false);
 
-/************************* GPS COORDINATE VALIDATION **************************/
-void validateGpsCoordinates() {
+/************************** VALIDATION UPON LEAVING ***************************/
+final String PATTERN_GPS =
+        "(" +
+          "(Longitude)|" +
+          "(Latitude)|" +
+          "(Easting)|" +
+          "(Northing)" +
+        ")";
+
+void validateTabGroupOnLeave() {
   Set tabGroups = getTakeFromGpsMappings().keySet();
 
   String prevTabGroup = getPreviouslyDisplayedTabGroup();
@@ -4717,38 +4772,39 @@ void validateGpsCoordinates() {
   if (!tabGroups.contains(prevTabGroup))
     return;
 
-  String gpsRefPattern = prevTabGroup +
-      "/*/" +
-      "(" +
-        "(Accuracy)|" +
-        "(Longitude)|" +
-        "(Latitude)|" +
-        "(Easting)|" +
-        "(Northing)" +
-      ")";
+  String refsToValidatePattern =
+      "(" + prevTabGroup + "/*/" + PATTERN_GPS + ")" +
+      "|(*/Map_Symbol)";
 
-  List gpsRefs = getRefsMatching(gpsRefPattern);
-  List nulls   = new ArrayList();
-  for (String ref : gpsRefs) nulls.add(isNull(getFieldValue(ref)));
+  List refsToValidate = getRefsMatching(refsToValidatePattern);
+  List invalidRefs = new ArrayList();
+  for (String ref : refsToValidate)
+    if (isNull(getFieldValue(ref)))
+      invalidRefs.add(ref);
 
-  boolean isValid = !any(nulls);
+  boolean isValid = invalidRefs.size() == 0;
 
   if (!isValid) {
-    String head  = "GPS Coordinates are Invalid";
-    String body  = "Press 'OK' to return to the record and fill in the GPS " +
-                    "coordinates, or 'Cancel' to dismiss this message.";
-    String cbOk  = "loadEntityFrom(getUuid(\"" + prevTabGroup + "\"))";
-    String cbBad = "";
+    String head, body, cbOk, cbBad;
+
+    head  = "Previous Tab Group Contains Invalid Data";
+
+    body  = "The following fields in the previous tab group should be filled ";
+    body += "in:\n";
+    for (String ref : invalidRefs) body += "-\t" + getArch16nKey(ref) + "\n";
+    body += "Press 'OK' to return to the record and fill in the invalid ";
+    body += "fields, or 'Cancel' to dismiss this message.";
+
+    cbOk  = "loadEntityFrom(getUuid(\"" + prevTabGroup + "\"))";
+
+    cbBad = "";
 
     showAlert(head, body, cbOk, cbBad);
   }
 }
 
 for (String ref : getTabGroups())
-  addOnEvent(ref, "leave", "validateGpsCoordinates()");
-
-/********************************* VALIDATION *********************************/
-addOnEvent("Feature/Main/CHECK_FOR_MISSING_DATA", "click", "validateFeature()");
+  addOnEvent(ref, "leave", "validateTabGroupOnLeave()");
 
 
 /******************************************************************************/

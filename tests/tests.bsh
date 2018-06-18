@@ -1,0 +1,101 @@
+// Mock function incField - Same as autogenered version, but without call to
+// `insertIntoLocalSettings` which entails a database access.
+Integer incField(String ref, Integer defaultVal) {
+  String val = getFieldValue(ref);
+
+  if (isNull(val)) {
+    setFieldValue(ref, defaultVal);
+    return defaultVal;
+  }
+
+  Integer inc = Integer.parseInt(val) + 1;
+  setFieldValue(ref, inc);
+  //insertIntoLocalSettings(ref, inc.toString());
+
+  return inc;
+}
+
+// A WARNING IS DISPLAYED (OR NOT) WHEN A FEATURE WITH BLANK FIELDS IS LEFT
+{
+  LeaveFeature() {
+    void run() { executeOnEvent("Feature", "leave"); }
+    return this;
+  }
+
+  makeFeatureValid() {
+    setFieldValue("Feature/Main/Latitude",   "1");
+    setFieldValue("Feature/Main/Longitude",  "2");
+    setFieldValue("Feature/Main/Northing",   "3");
+    setFieldValue("Feature/Main/Easting",    "4");
+    setFieldValue("Feature/Main/Map_Symbol", "5");
+  }
+
+  updateDisplayedTabGroup("Feature");
+  updateDisplayedTabGroup("foo");
+
+  String invalid = getStdout(LeaveFeature()); makeFeatureValid();
+  String valid   = getStdout(LeaveFeature());
+
+  assert(!isNull(invalid));
+  assert( isNull(valid  ));
+
+  assert(invalid.contains("Latitude"));
+  assert(invalid.contains("Longitude"));
+  assert(invalid.contains("Northing"));
+  assert(invalid.contains("Easting"));
+  assert(invalid.contains("Map_Symbol"));
+}
+
+// A FEATURE IS POPULATED WITH GPS COORDS WHEN SOMEONE PRESSES THE
+// 'Create Record' BUTTON IN `Control/Map`.
+{
+  // This mock definition of `fetchOne` will be called by `fillInGPS`.
+  void fetchOne(String query, FetchCallback cb) {
+    List result = new ArrayList();
+
+    result.add("Longitude");
+    result.add("Latitude");
+    result.add("Easting");
+    result.add("Northing");
+
+    cb.onFetch(result);
+  }
+
+  ValidateFeature() {
+    void run() { validateFeature(); }
+    return this;
+  }
+
+  setUuid("Feature", "the-uuid-of-feature");
+  clearGpsInTabGroup("Feature");
+  clearField("Feature/Main/Map_Symbol");
+
+  // Indicates whether we came from the 'Create Record Button'
+  DO_FILL_IN_GPS_FOR_FEATURE = true;
+
+  String invalid = getStdout(ValidateFeature());
+  executeOnEvent("Feature", "firstsave");
+  String valid = getStdout(ValidateFeature());
+
+  assert(invalid.contains("Latitude"));
+  assert(invalid.contains("Longitude"));
+  assert(invalid.contains("Northing"));
+  assert(invalid.contains("Easting"));
+
+  assert(!valid.contains("Latitude"));
+  assert(!valid.contains("Longitude"));
+  assert(!valid.contains("Northing"));
+  assert(!valid.contains("Easting"));
+}
+
+// DUPLICATING A `Feature` AUTOINCREMENTS THE ID
+{
+  setFieldValue("Control/IDs/Next_Point_ID", "4242");
+
+
+  executeOnEvent("Feature", "create");
+  assert("4242".equals(getFieldValue("Feature/Main/ID")));
+
+  executeOnEvent("Feature", "copy");
+  assert("4243".equals(getFieldValue("Feature/Main/ID")));
+}

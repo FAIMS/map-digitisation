@@ -26,11 +26,6 @@
         <param type="field" value="measure"/>
       </validator>
     </property>
-    <property name="Feature Type">
-      <validator type="blankchecker">
-        <param type="field" value="vocab"/>
-      </validator>
-    </property>
     <property name="Map Symbol">
       <validator type="blankchecker">
         <param type="field" value="vocab"/>

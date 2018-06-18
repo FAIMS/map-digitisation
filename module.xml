@@ -39,7 +39,6 @@
 <Feature>
   <fmt>{{ID}}</fmt>
   <Main>
-    <CHECK_FOR_MISSING_DATA t="button" c="red"/>
     <cols>
       <ID c="readonly"/>
       <author/>
@@ -49,7 +48,7 @@
     <Find_This_in_The_Map l="Control/Map">
       Find This in The Map...
     </Find_This_in_The_Map>
-    <Feature_Type f="persist notnull">
+    <Feature_Type f="persist">
       <desc>Comment on Feature type</desc>
       <opts>
         <opt>Mound</opt>
@@ -70,7 +69,9 @@
     </Map_Symbol>
     <Source f="persist">
       <opts>
-        <opt>Topomap</opt>
+        <opt>Topomap - 50k</opt>
+        <opt>Topomap - 5k</opt>
+        <opt>Topomap - Other</opt>
         <opt>Atlas</opt>
         <opt>GC</opt>
         <opt>Field survey</opt>
@@ -156,7 +157,12 @@ void incFeatureAutoNum() {
 addOnEvent("Shape",   "create", "incShapeAutoNum()");
 addOnEvent("Feature", "create", "incFeatureAutoNum()");
 
+addOnEvent("Shape",   "copy", "incShapeAutoNum()");
+addOnEvent("Feature", "copy", "incFeatureAutoNum()");
+
 /************************************ MAP *************************************/
+boolean DO_FILL_IN_GPS_FOR_FEATURE = false;
+
 void clearGeometry() {
   List geometry = getGeometryList(MAP_REF, DATA_ENTRY_LAYER_ID);
 
@@ -184,6 +190,8 @@ boolean checkForGeometry() {
 }
 
 void onClickControlCreateRecord() {
+  if (geoListHasInstanceOf(Point  .class)) DO_FILL_IN_GPS_FOR_FEATURE = true;
+
   if (geoListHasInstanceOf(Point  .class)) onClickControlCreateFeature();
   if (geoListHasInstanceOf(Line   .class)) onClickControlCreateShape();
   if (geoListHasInstanceOf(Polygon.class)) onClickControlCreateShape();
@@ -225,6 +233,21 @@ boolean findThisInTheMap() {
   return true;
 }
 
+void fillInGPSForFeature() {
+  String gpsRefsPattern = "Feature/*/" + PATTERN_GPS;
+  List gpsRefs = getRefsMatching(gpsRefsPattern);
+
+  List nulls   = new ArrayList();
+  for (String ref : gpsRefs) nulls.add(isNull(getFieldValue(ref)));
+
+  boolean hasGps = !any(nulls);
+
+  if (!hasGps && DO_FILL_IN_GPS_FOR_FEATURE)
+    fillInGPS("Feature");
+
+  DO_FILL_IN_GPS_FOR_FEATURE = false;
+}
+
 addOnEventCond("Feature/Main/Find_This_in_The_Map", "click", "findThisInTheMap()");
 
 addOnEventCond("Control/Map/Create_Record", "click", "checkForGeometry()");
@@ -238,6 +261,7 @@ addOnEvent(
 );
 
 addOnEvent("Feature", "save", "clearGeometry()");
+addOnEvent("Feature", "firstsave", "fillInGPSForFeature()");
 addOnEvent("Shape",   "save", "clearGeometry()");
 
 addOnEvent("Control/Map", "show",  "refreshMap()");
@@ -593,8 +617,16 @@ String getSearchGeoType(String ref) {
 setFileSyncEnabled(false);
 setSyncEnabled    (false);
 
-/************************* GPS COORDINATE VALIDATION **************************/
-void validateGpsCoordinates() {
+/************************** VALIDATION UPON LEAVING ***************************/
+final String PATTERN_GPS =
+        "(" +
+          "(Longitude)|" +
+          "(Latitude)|" +
+          "(Easting)|" +
+          "(Northing)" +
+        ")";
+
+void validateTabGroupOnLeave() {
   Set tabGroups = getTakeFromGpsMappings().keySet();
 
   String prevTabGroup = getPreviouslyDisplayedTabGroup();
@@ -602,38 +634,39 @@ void validateGpsCoordinates() {
   if (!tabGroups.contains(prevTabGroup))
     return;
 
-  String gpsRefPattern = prevTabGroup +
-      "/*/" +
-      "(" +
-        "(Accuracy)|" +
-        "(Longitude)|" +
-        "(Latitude)|" +
-        "(Easting)|" +
-        "(Northing)" +
-      ")";
+  String refsToValidatePattern =
+      "(" + prevTabGroup + "/*/" + PATTERN_GPS + ")" +
+      "|(*/Map_Symbol)";
 
-  List gpsRefs = getRefsMatching(gpsRefPattern);
-  List nulls   = new ArrayList();
-  for (String ref : gpsRefs) nulls.add(isNull(getFieldValue(ref)));
+  List refsToValidate = getRefsMatching(refsToValidatePattern);
+  List invalidRefs = new ArrayList();
+  for (String ref : refsToValidate)
+    if (isNull(getFieldValue(ref)))
+      invalidRefs.add(ref);
 
-  boolean isValid = !any(nulls);
+  boolean isValid = invalidRefs.size() == 0;
 
   if (!isValid) {
-    String head  = "GPS Coordinates are Invalid";
-    String body  = "Press 'OK' to return to the record and fill in the GPS " +
-                    "coordinates, or 'Cancel' to dismiss this message.";
-    String cbOk  = "loadEntityFrom(getUuid(\"" + prevTabGroup + "\"))";
-    String cbBad = "";
+    String head, body, cbOk, cbBad;
+
+    head  = "Previous Tab Group Contains Invalid Data";
+
+    body  = "The following fields in the previous tab group should be filled ";
+    body += "in:\n";
+    for (String ref : invalidRefs) body += "-\t" + getArch16nKey(ref) + "\n";
+    body += "Press 'OK' to return to the record and fill in the invalid ";
+    body += "fields, or 'Cancel' to dismiss this message.";
+
+    cbOk  = "loadEntityFrom(getUuid(\"" + prevTabGroup + "\"))";
+
+    cbBad = "";
 
     showAlert(head, body, cbOk, cbBad);
   }
 }
 
 for (String ref : getTabGroups())
-  addOnEvent(ref, "leave", "validateGpsCoordinates()");
-
-/********************************* VALIDATION *********************************/
-addOnEvent("Feature/Main/CHECK_FOR_MISSING_DATA", "click", "validateFeature()");
+  addOnEvent(ref, "leave", "validateTabGroupOnLeave()");
 ]]></logic>
 
 </module>

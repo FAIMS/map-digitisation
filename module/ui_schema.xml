@@ -84,7 +84,6 @@
           </Control>
           <Feature>
             <Main>
-              <CHECK_FOR_MISSING_DATA/>
               <Colgroup_1>
                 <Col_1>
                   <ID/>
@@ -330,9 +329,6 @@
       <label>{Feature}</label>
       <group ref="Main">
         <label>{Main}</label>
-        <trigger ref="CHECK_FOR_MISSING_DATA" faims_style_class="red">
-          <label>{CHECK_FOR_MISSING_DATA}</label>
-        </trigger>
         <group ref="Colgroup_1" faims_style="orientation">
           <label/>
           <group ref="Col_1" faims_style="even">
@@ -393,7 +389,7 @@
         <trigger ref="Find_This_in_The_Map">
           <label>{Find_This_in_The_Map___}</label>
         </trigger>
-        <select1 faims_attribute_name="Feature Type" faims_attribute_type="vocab" ref="Feature_Type" faims_style_class="required">
+        <select1 faims_attribute_name="Feature Type" faims_attribute_type="vocab" ref="Feature_Type">
           <label>{Feature_Type}</label>
           <item>
             <label>Options not loaded</label>
