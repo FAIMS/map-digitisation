@@ -35,25 +35,25 @@ For more details about the TRAP digitisation project please contact **adela@feda
 If you have any questions about the module, please contact the FAIMS team at **enquiries@fedarch.org** and we will get back to you within one business day.
 
 <p align="left">
-  <img src="https://github.com/FAIMS/burial/blob/master/screenshots/Screenshot_20210726-151755.png" width="250"/>
-  <img src="https://github.com/FAIMS/burial/blob/master/screenshots/Screenshot_20210511-154016.png" width="250"/>
-  <img src="https://github.com/FAIMS/burial/blob/master/screenshots/Screenshot_20210511-154034.png" width="250"/>
+  <img src="https://github.com/FAIMS/map-digitisation/blob/master/screenshots/Screenshot_20210726-151755.png" width="250"/>
+  <img src="https://github.com/FAIMS/map-digitisation/blob/master/screenshots/Screenshot_20210511-154016.png" width="250"/>
+  <img src="https://github.com/FAIMS/map-digitisation/blob/master/screenshots/Screenshot_20210511-154034.png" width="250"/>
 </p>
 
 <p align="left">
-  <img src="https://github.com/FAIMS/burial/blob/master/screenshots/Screenshot_20210511-154153.png" width="250"/>
- <img src="https://github.com/FAIMS/burial/blob/master/screenshots/Screenshot_20210511-154212.png" width="250"/>
-  <img src="https://github.com/FAIMS/burial/blob/master/screenshots/Screenshot_20210511-155509.png" width="250"/>
+  <img src="https://github.com/FAIMS/map-digitisation/blob/master/screenshots/Screenshot_20210511-154153.png" width="250"/>
+ <img src="https://github.com/FAIMS/map-digitisation/blob/master/screenshots/Screenshot_20210511-154212.png" width="250"/>
+  <img src="https://github.com/FAIMS/map-digitisation/blob/master/screenshots/Screenshot_20210511-155509.png" width="250"/>
 </p>
 
 <p align="left">
-  <img src="https://github.com/FAIMS/burial/blob/master/screenshots/Screenshot_20210511-154101.png" width="250"/>
-  <img src="https://github.com/FAIMS/burial/blob/master/screenshots/Screenshot_20210511-155414.png" width="250"/>
-  <img src="https://github.com/FAIMS/burial/blob/master/screenshots/Screenshot_20210511-154251.png" width="250"/>
+  <img src="https://github.com/FAIMS/map-digitisation/blob/master/screenshots/Screenshot_20210511-154101.png" width="250"/>
+  <img src="https://github.com/FAIMS/map-digitisation/blob/master/screenshots/Screenshot_20210511-155414.png" width="250"/>
+  <img src="https://github.com/FAIMS/map-digitisation/blob/master/screenshots/Screenshot_20210511-154251.png" width="250"/>
 </p>
 
 <p align="left">
-  <img src="https://github.com/FAIMS/burial/blob/master/screenshots/Screenshot_20210511-154302.png" width="250"/>
-  <img src="https://github.com/FAIMS/burial/blob/master/screenshots/Screenshot_20210511-154323.png" width="250"/>
-  <img src="https://github.com/FAIMS/burial/blob/master/screenshots/Screenshot_20210511-154117.png" width="250"/>
+  <img src="https://github.com/FAIMS/map-digitisation/blob/master/screenshots/Screenshot_20210511-154302.png" width="250"/>
+  <img src="https://github.com/FAIMS/map-digitisation/blob/master/screenshots/Screenshot_20210511-154323.png" width="250"/>
+  <img src="https://github.com/FAIMS/map-digitisation/blob/master/screenshots/Screenshot_20210511-154117.png" width="250"/>
 </p>
