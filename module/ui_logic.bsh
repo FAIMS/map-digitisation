@@ -1978,7 +1978,7 @@ void enableRecordCreation() {
 }
 
 boolean isInPerfTestTime() {
-  return false;
+  return true;
 }
 
 // Produce entity number specification
@@ -2177,7 +2177,7 @@ void insertIntoLocalSettings(String key, String val, boolean doOverwrite) {
 
   q = dbReplaceFirst(q, key);
   q = dbReplaceFirst(q, val);
-  fetchOne(q);
+  timedFetchOne(q);
 }
 
 void insertIntoLocalSettings(String key, String val) {
@@ -2192,7 +2192,7 @@ void deleteFromLocalSettings(String key) {
   String q = "DELETE FROM localsettings WHERE key=%s";
   q = dbReplaceFirst(q, key);
 
-  fetchOne(q);
+  timedFetchOne(q);
 }
 
 void insertIntoLocalSettingsOnChange(String ref) {
@@ -2228,7 +2228,7 @@ void setFieldValueFromLocalSettings(
     }
   };
 
-  fetchOne(q, set);
+  timedFetchOne(q, set);
 }
 
 void setFieldValueFromLocalSettings(
@@ -2510,7 +2510,7 @@ void fetchVocab(String vocabName, List storageList) {
 }
 
 void fetchVocab(String vocabName, List storageList, String callbackFunction) {
-  fetchAll("select vocabid, vocabname from vocabulary left join attributekey using (attributeid) where attributename = '" + vocabName + "';", new FetchCallback() {
+  timedFetchAll("select vocabid, vocabname from vocabulary left join attributekey using (attributeid) where attributename = '" + vocabName + "';", new FetchCallback() {
     onFetch(result) {
       if (isNull(result))
         result = new ArrayList();
@@ -2782,7 +2782,7 @@ void fetchMenuValues() {
   };
 
   incJobsTillLoaded();
-  fetchAll(q, populateHashMap);
+  timedFetchAll(q, populateHashMap);
 }
 
 addOnEvent("module", "load", "makeVocabs()");
@@ -3045,7 +3045,7 @@ void populateListForUsers(){
 
   USER_MENU_IS_LOADED = false;
   populateMenu(USER_MENU_PATH, MSG_LOADING);
-  fetchAll(q, callback);
+  timedFetchAll(q, callback);
 }
 
 String getUserMenuValue(int i) {
@@ -3536,7 +3536,7 @@ void newRecord(String tabgroup, boolean doUpdateRelVars) {
         newRecord(tabgroup, false);
       }
     };
-    fetchAll(q, updateRelVars);
+    timedFetchAll(q, updateRelVars);
     return;
   }
 
@@ -3677,7 +3677,7 @@ void loadEntityFrom(String entityID, String onFail) {
                            "  JOIN aenttype " +
                            " USING (aenttypeid) " +
                            " WHERE uuid = '" + entityID + "'";
-  fetchAll(getEntTypeNameQ, new FetchCallback() {
+  timedFetchAll(getEntTypeNameQ, new FetchCallback() {
     onFetch(result) {
       if (
           result               == null ||
@@ -3758,7 +3758,7 @@ void duplicateFeature(){
     onSave(uuid, newRecord) {
       setUuid(tabgroup, uuid);
 
-      fetchAll(getDuplicateRelnQuery(uuidOld), new FetchCallback(){
+      timedFetchAll(getDuplicateRelnQuery(uuidOld), new FetchCallback(){
         onFetch(result) {
           Log.e("Module", result.toString());
 
@@ -3779,7 +3779,7 @@ void duplicateFeature(){
   };
 
   String extraDupeAttributes = "";
-  fetchAll(getDuplicateAttributeQuery(uuidOld, extraDupeAttributes), new FetchCallback(){
+  timedFetchAll(getDuplicateAttributeQuery(uuidOld, extraDupeAttributes), new FetchCallback(){
     onFetch(result) {
       excludeAttributes = new ArrayList();
 
@@ -3805,7 +3805,7 @@ void duplicateShape(){
     onSave(uuid, newRecord) {
       setUuid(tabgroup, uuid);
 
-      fetchAll(getDuplicateRelnQuery(uuidOld), new FetchCallback(){
+      timedFetchAll(getDuplicateRelnQuery(uuidOld), new FetchCallback(){
         onFetch(result) {
           Log.e("Module", result.toString());
 
@@ -3826,7 +3826,7 @@ void duplicateShape(){
   };
 
   String extraDupeAttributes = "";
-  fetchAll(getDuplicateAttributeQuery(uuidOld, extraDupeAttributes), new FetchCallback(){
+  timedFetchAll(getDuplicateAttributeQuery(uuidOld, extraDupeAttributes), new FetchCallback(){
     onFetch(result) {
       excludeAttributes = new ArrayList();
 
@@ -3891,7 +3891,7 @@ void search(){
   searchQuery = dbReplaceFirst(searchQuery, "{type}", type);
 
   populateMenu(refEntityList, MSG_LOADING);
-  populateCursorList(refEntityList, searchQuery, 25);
+  timedPopulateCursorList(refEntityList, searchQuery, 25);
   refreshTabgroupCSS("Control");
 
   Log.d("Module", "Search query: " + searchQuery);
@@ -4008,7 +4008,7 @@ void fillInGPS(String tabgroup) {
                  "  FROM latestnondeletedarchent " +
                  " WHERE uuid = '" + currentUuid + "';";
 
-  fetchOne(query, new FetchCallback() {
+  timedFetchOne(query, new FetchCallback() {
     onFetch(result) {
       print("[fillInGPS()] Fetched DB transformed geometry: " + result);
       setFieldValue(tabgroupToTabRef.get(tabgroup) + "/Longitude" , result.get(0));
@@ -4180,8 +4180,8 @@ void populateMenuWithEntities (
   else                    q = getChildEntitiesQ;
 
   switch (viewType) {
-    case "dropdown": fetchAll(q, cbPopulateDropDown); break;
-    case "list":     populateCursorList(ref, q, 25); break;
+    case "dropdown": timedFetchAll(q, cbPopulateDropDown); break;
+    case "list":     timedPopulateCursorList(ref, q, 25); break;
   }
 }
 
@@ -4625,7 +4625,7 @@ void redrawGcValueLayers() {
     }
   };
 
-  fetchAll(q, showDatabaseLayersByVocabName);
+  timedFetchAll(q, showDatabaseLayersByVocabName);
 }
 
 /********************************** MAP INIT **********************************/
@@ -4678,7 +4678,7 @@ void populateSelectUser(){
                                    " UNION " +
                                    "SELECT -1, '{All}'";
 
-  fetchAll(getNonDeletedUsersQuery, new FetchCallback() {
+  timedFetchAll(getNonDeletedUsersQuery, new FetchCallback() {
     onFetch(result) {
       populateDropDown(refSearchUsers, result, false);
       search();
@@ -4721,7 +4721,7 @@ void search(){
   searchQuery = replaceFirst(searchQuery, "{geo}",  geo);
   searchQuery = replaceFirst(searchQuery, "{geo}",  geo);
 
-  populateCursorList(refEntityList, searchQuery, 25);
+  timedPopulateCursorList(refEntityList, searchQuery, 25);
   refreshTabgroupCSS(tabgroup);
 
   Log.d("Module", "Search query: " + searchQuery);

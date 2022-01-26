@@ -1,5 +1,5 @@
 <!--@POSTPROC: ./postproc.sh-->
-<module>
+<module test_mode="true">
 <User_List f="nodata">
   <User_List f="noscroll">
     <User_List t="list" f="nolabel user" l="Control"/>
